@@ -11,7 +11,8 @@
     "allowJs": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./src/*"]
+      "~/*": ["./src/*"],
+      "@/*": ["./src/styles/*"]
     },
 
     // Remix takes care of building everything in `remix build`.

@@ -1,6 +1,6 @@
 import React from "react";
 import BlockContent from "../../../../BlockContent";
-import styles from "~/styles/Job.module.json";
+import styles from "@/Job.module.css";
 
 interface JobProps {
   company: string;
@@ -17,7 +17,7 @@ const Job = ({
   location,
   startDate,
   endDate,
-  description
+  description,
 }: JobProps) => {
   const startForm = new Date(startDate);
   const endForm = new Date(endDate);

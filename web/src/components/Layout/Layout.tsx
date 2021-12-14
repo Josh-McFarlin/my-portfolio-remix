@@ -2,7 +2,7 @@ import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Sidebar from "./Sidebar";
-import classes from "~/styles/Layout.module.json";
+import classes from "@/Layout.module.css";
 
 interface LayoutProps {
   preview?: boolean;
@@ -10,12 +10,7 @@ interface LayoutProps {
   children?: React.ReactNode;
 }
 
-const Layout = ({
-  preview,
-  siteConfig,
-  children,
-  ...rest
-}: LayoutProps) => {
+const Layout = ({ preview, siteConfig, children, ...rest }: LayoutProps) => {
   if (siteConfig?.config == null) {
     console.error("Missing config");
 

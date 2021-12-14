@@ -1,23 +1,19 @@
 import React from "react";
 import { Link } from "remix";
 import urls from "../../utils/urls";
-import styles from "~/styles/Cta.module.json";
+import styles from "@/Cta.module.css";
 
 interface ctaProps {
   title: string;
   route?: {
     slug?: {
-      current?: string
-    }
+      current?: string;
+    };
   };
   link?: string;
 }
 
-const cta = ({
-  title,
-  route,
-  link
-}: ctaProps) => {
+const cta = ({ title, route, link }: ctaProps) => {
   if (route && route.slug && route.slug.current) {
     return (
       <Link to={urls.pages.sanityPage(route.slug.current)}>

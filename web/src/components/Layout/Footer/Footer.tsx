@@ -2,22 +2,19 @@ import React from "react";
 import { Link, useLocation, useSearchParams } from "remix";
 import BlockContent from "../../cms/BlockContent";
 import urls from "../../../utils/urls";
-import styles from "~/styles/Footer.module.json";
+import styles from "@/Footer.module.css";
 
 interface FooterProps {
   navItems?: {
-    title: string,
+    title: string;
     slug: {
-      current?: string
-    }
+      current?: string;
+    };
   }[];
   text?: object[];
 }
 
-const Footer = ({
-  navItems,
-  text
-}: FooterProps) => {
+const Footer = ({ navItems, text }: FooterProps) => {
   const location = useLocation();
   const [query] = useSearchParams();
 

@@ -1,7 +1,7 @@
 import React from "react";
 import client from "../../utils/sanity/client";
 import SanityImage from "../cms/SanityImage";
-import styles from "~/styles/RenderResume.module.json";
+import styles from "@/RenderResume.module.css";
 
 const Loader = () => <div className={styles.loading}>Loading Resume...</div>;
 

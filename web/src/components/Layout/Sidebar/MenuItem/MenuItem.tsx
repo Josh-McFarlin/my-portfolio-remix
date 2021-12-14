@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Link, useLocation, useSearchParams } from "remix";
 import Icon from "../../../cms/RenderSections/sections/Icon";
 import urls from "../../../../utils/urls";
-import styles from "~/styles/MenuItem.module.json";
+import styles from "@/MenuItem.module.css";
 
 const variants = {
   open: {
@@ -45,10 +45,7 @@ interface MenuItemProps {
   toggle(...args: unknown[]): unknown;
 }
 
-const MenuItem = ({
-  item,
-  toggle
-}: MenuItemProps) => {
+const MenuItem = ({ item, toggle }: MenuItemProps) => {
   const { slug, title, link, icon } = item;
   const location = useLocation();
   const [query] = useSearchParams();

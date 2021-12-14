@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require("path");
-const fsp = require("fs/promises");
+const fs = require("fs-extra");
 
 module.exports = {
   plugins: [
@@ -11,17 +10,12 @@ module.exports = {
     require("postcss-discard-comments"),
     require("postcss-modules")({
       getJSON: async (cssFilename, json, outputFilename) => {
-        // console.log(cssFilename, json, outputFilename);
-
-        await fsp
+        await fs
           .mkdir(path.dirname(outputFilename), { recursive: true })
           .catch(() => {});
 
         if (Object.keys(json).length > 0) {
-          await fsp.writeFile(
-            `${outputFilename.replace(/\.css$/, ".json")}`,
-            JSON.stringify(json)
-          );
+          await fs.writeFile(`${outputFilename}.json`, JSON.stringify(json));
         }
       },
     }),

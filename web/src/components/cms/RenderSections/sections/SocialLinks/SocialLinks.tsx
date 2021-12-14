@@ -1,6 +1,6 @@
 import React from "react";
 import { Icon as IconifyIcon } from "@iconify/react";
-import classes from "~/styles/SocialLinks.module.json";
+import classes from "@/SocialLinks.module.css";
 
 interface TextSectionProps {
   linkedIn?: string;
@@ -13,7 +13,7 @@ const TextSection = ({
   linkedIn,
   gitHub,
   twitter,
-  instagram
+  instagram,
 }: TextSectionProps) => (
   <div className={classes.root}>
     <section className={classes.section}>

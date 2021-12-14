@@ -2,7 +2,7 @@ import React from "react";
 import BlockContent from "../../../BlockContent";
 import Cta from "../../../../Cta";
 import SanityImage from "../../../SanityImage";
-import styles from "~/styles/ImageSection.module.json";
+import styles from "@/ImageSection.module.css";
 
 interface ImageSectionProps {
   heading: string;
@@ -10,8 +10,8 @@ interface ImageSectionProps {
   text: unknown[];
   image: {
     asset?: {
-      _ref?: string
-    }
+      _ref?: string;
+    };
   };
   backgroundImage: string;
   tagline: string;
@@ -23,7 +23,7 @@ const ImageSection = ({
   label,
   text,
   image,
-  cta
+  cta,
 }: ImageSectionProps) => {
   if (image == null) {
     return null;

@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import styles from "~/styles/MenuToggle.module.json";
+import styles from "@/MenuToggle.module.css";
 
 const variants = {
   open: {
@@ -31,9 +31,7 @@ interface MenuToggleProps {
   toggle(...args: unknown[]): unknown;
 }
 
-const MenuToggle = ({
-  toggle
-}: MenuToggleProps) => (
+const MenuToggle = ({ toggle }: MenuToggleProps) => (
   <button className={styles.root} onClick={toggle} type="button">
     <motion.svg width="23" height="23" viewBox="0 0 23 23" variants={variants}>
       <Path

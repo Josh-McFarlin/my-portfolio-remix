@@ -1,7 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 import SanityImage from "../../../SanityImage";
-import styles from "~/styles/BasicImage.module.json";
+import styles from "@/BasicImage.module.css";
 
 interface BasicImageProps {
   image: object;

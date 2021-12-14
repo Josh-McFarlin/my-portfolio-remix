@@ -1,7 +1,7 @@
 import React from "react";
 import BlockContent from "../../../../BlockContent";
 import SanityImage from "../../../../SanityImage";
-import styles from "~/styles/Project.module.json";
+import styles from "@/Project.module.css";
 
 interface ProjectProps {
   name: string;
@@ -11,13 +11,7 @@ interface ProjectProps {
   links?: object[];
 }
 
-const Project = ({
-  name,
-  tags,
-  description,
-  image,
-  links
-}: ProjectProps) => (
+const Project = ({ name, tags, description, image, links }: ProjectProps) => (
   <div className={styles.root}>
     <div className={styles.image}>
       <SanityImage src={image} layout="fill" objectFit="cover" />

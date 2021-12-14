@@ -2,7 +2,7 @@ import React from "react";
 import clsx from "clsx";
 import { Link, useLocation, useSearchParams } from "remix";
 import urls from "../../../utils/urls";
-import styles from "~/styles/Header.module.json";
+import styles from "@/Header.module.css";
 
 const conditionalJoin = (slug) => {
   if (slug === undefined) return "";
@@ -13,17 +13,14 @@ const conditionalJoin = (slug) => {
 interface HeaderProps {
   name: string;
   navItems?: {
-    title?: string,
+    title?: string;
     slug?: {
-      current?: string
-    }
+      current?: string;
+    };
   }[];
 }
 
-const Header = ({
-  name = "Missing name",
-  navItems
-}: HeaderProps) => {
+const Header = ({ name = "Missing name", navItems }: HeaderProps) => {
   const location = useLocation();
   const [query] = useSearchParams();
 

@@ -1,16 +1,13 @@
 import React from "react";
 import SanityImage from "../../../../SanityImage";
-import styles from "~/styles/Skill.module.json";
+import styles from "@/Skill.module.css";
 
 interface SkillProps {
   name?: string;
   image?: object;
 }
 
-const Skill = ({
-  name,
-  image
-}: SkillProps) => (
+const Skill = ({ name, image }: SkillProps) => (
   <div className={styles.root}>
     {image && (
       <div className={styles.skillImage}>

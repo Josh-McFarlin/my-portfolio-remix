@@ -2,7 +2,7 @@ import React from "react";
 import BlockContent from "../../../BlockContent";
 import Cta from "../../../../Cta";
 import SanityImage from "../../../SanityImage";
-import styles from "~/styles/Hero.module.json";
+import styles from "@/Hero.module.css";
 
 interface HeroProps {
   heading: string;
@@ -11,12 +11,7 @@ interface HeroProps {
   ctas: object[];
 }
 
-const Hero = ({
-  heading,
-  backgroundImage,
-  tagline,
-  ctas
-}: HeroProps) => (
+const Hero = ({ heading, backgroundImage, tagline, ctas }: HeroProps) => (
   <div className={styles.root}>
     <div className={styles.content}>
       <h1 className={styles.title}>{heading}</h1>

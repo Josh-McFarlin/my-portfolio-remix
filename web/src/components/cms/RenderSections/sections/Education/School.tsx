@@ -1,6 +1,6 @@
 import React from "react";
 import BlockContent from "../../../BlockContent";
-import styles from "~/styles/School.module.json";
+import styles from "@/School.module.css";
 
 interface SchoolProps {
   name: string;
@@ -19,7 +19,7 @@ const School = ({
   endYear,
   description,
   completedCourses,
-  currentCourses
+  currentCourses,
 }: SchoolProps) => (
   <div className={styles.root}>
     <section className={styles.school}>

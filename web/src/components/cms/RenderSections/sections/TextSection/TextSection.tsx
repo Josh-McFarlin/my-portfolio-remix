@@ -1,6 +1,6 @@
 import React from "react";
 import BlockContent from "../../../BlockContent";
-import styles from "~/styles/TextSection.module.json";
+import styles from "@/TextSection.module.css";
 
 interface TextSectionProps {
   heading: string;
@@ -8,11 +8,7 @@ interface TextSectionProps {
   text: object[];
 }
 
-const TextSection = ({
-  heading,
-  label,
-  text
-}: TextSectionProps) => (
+const TextSection = ({ heading, label, text }: TextSectionProps) => (
   <div className={styles.root}>
     <section className={styles.section}>
       <div className={styles.label}>{label}</div>

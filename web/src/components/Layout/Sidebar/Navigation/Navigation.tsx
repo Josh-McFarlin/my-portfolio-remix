@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import MenuItem from "../MenuItem";
-import styles from "~/styles/Navigation.module.json";
+import styles from "@/Navigation.module.css";
 
 const variants = {
   open: {
@@ -25,10 +25,7 @@ interface NavigationProps {
   toggle(...args: unknown[]): unknown;
 }
 
-const Navigation = ({
-  navItems,
-  toggle
-}: NavigationProps) => (
+const Navigation = ({ navItems, toggle }: NavigationProps) => (
   <motion.div className={styles.root} variants={variants}>
     {navItems.map((item) => (
       <MenuItem item={item} key={item._id} toggle={toggle} />
