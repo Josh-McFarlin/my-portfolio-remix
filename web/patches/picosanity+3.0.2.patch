@@ -1,0 +1,22 @@
+diff --git a/node_modules/picosanity/lib/client.js b/node_modules/picosanity/lib/client.js
+index a671386..4c897ce 100644
+--- a/node_modules/picosanity/lib/client.js
++++ b/node_modules/picosanity/lib/client.js
+@@ -51,7 +51,7 @@ PicoSanity.prototype.fetch = function (query, params) {
+ 
+   var host = !cfg.useCdn || cfg.token || usePost ? apiHost : cdnHost;
+   var opts = {
+-    credentials: credentials,
++    // credentials: credentials,
+     headers: headers,
+     method: usePost ? 'POST' : 'GET',
+     body: usePost ? JSON.stringify({
+@@ -59,6 +59,8 @@ PicoSanity.prototype.fetch = function (query, params) {
+       params: params
+     }) : undefined
+   };
++  // console.log("~~~~~~~~~~~~~~~~~~~")
++  // console.log("opts", opts)
+   var url = "https://".concat(cfg.projectId, ".").concat(host, "/").concat(version, "/data/query/").concat(cfg.dataset);
+   return this.fetcher("".concat(url).concat(usePost ? '' : qs), opts).then(parse);
+ };
