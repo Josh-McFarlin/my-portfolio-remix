@@ -10,5 +10,5 @@ node_modules
 
 .mf
 
-styles/generated
-styles/**/*.json
+src/styles/generated
+src/styles/**/*.json
