@@ -7,20 +7,19 @@ import "focus-visible/dist/focus-visible.min.js";
 
 import normalizeUrl from "normalize.css";
 import stylesUrl from "./styles/global.css";
-
 import AppCss from "./styles/App.css";
-import BICss from "./styles/BasicImage.module.css";
 import ColorCSS from "./styles/Colors.css";
 import ComponentCSS from "./styles/Components.css";
+import ModulesCSS from "./styles/modules.css";
 
 export function links() {
   return [
     { rel: "stylesheet", href: stylesUrl },
     { rel: "stylesheet", href: normalizeUrl },
     { rel: "stylesheet", href: AppCss },
-    { rel: "stylesheet", href: BICss },
     { rel: "stylesheet", href: ColorCSS },
     { rel: "stylesheet", href: ComponentCSS },
+    { rel: "stylesheet", href: ModulesCSS },
   ];
 }
 
