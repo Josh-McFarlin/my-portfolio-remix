@@ -1,0 +1,26 @@
+._root_1lv4i_4{
+  padding-bottom:2rem;
+  margin-top:-1.5rem;
+}
+
+._root_1lv4i_4 ._section_1lv4i_8{
+    width:100%;
+    max-width:40em;
+    margin:0 auto;
+    padding:0 1.5rem;
+    box-sizing:border-box;
+  }
+
+._root_1lv4i_4 ._section_1lv4i_8 ._heading_1lv4i_15{
+      font-size:1.28571rem;
+      line-height:1.5;
+      margin:0.25em 0;
+      text-align:center;
+    }
+
+._root_1lv4i_4 ._section_1lv4i_8 ._skillsList_1lv4i_22{
+      display:flex;
+      flex-direction:row;
+      flex-wrap:wrap;
+      justify-content:center;
+    }

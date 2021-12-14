@@ -1,0 +1,44 @@
+._root_vfdz5_4{
+  position:relative;
+  padding:2rem 0;
+}
+
+._root_vfdz5_4 ._content_vfdz5_8{
+    position:relative;
+    margin:0 1.5rem;
+    max-width:60em;
+  }
+
+._root_vfdz5_4 ._content_vfdz5_8 ._image_vfdz5_13{
+      display:block;
+      width:100%;
+    }
+
+._root_vfdz5_4 ._content_vfdz5_8 ._caption_vfdz5_18{
+      width:100%;
+      margin:0 auto;
+      box-sizing:border-box;
+    }
+
+._root_vfdz5_4 ._content_vfdz5_8 ._caption_vfdz5_18 ._captionBox_vfdz5_23{
+        background-color:#f0efe9;
+        border:1px solid #131313;
+        padding:1.5rem;
+      }
+
+._root_vfdz5_4 ._content_vfdz5_8 ._caption_vfdz5_18 ._captionBox_vfdz5_23 ._label_vfdz5_28{
+          font-size:0.71429rem;
+          line-height:1.2;
+          letter-spacing:0.5px;
+          text-transform:uppercase;
+          margin-top:1em;
+        }
+
+._root_vfdz5_4 ._content_vfdz5_8 ._caption_vfdz5_18 ._captionBox_vfdz5_23 ._label_vfdz5_28 + ._title_vfdz5_36{
+          margin-top:0.2em;
+        }
+
+._root_vfdz5_4 ._content_vfdz5_8 ._caption_vfdz5_18 ._captionBox_vfdz5_23 ._title_vfdz5_36{
+          font-size:1.5rem;
+          line-height:1.42857;
+        }

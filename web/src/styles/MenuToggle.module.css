@@ -1,0 +1,19 @@
+._root_1dsdc_4{
+  outline:none;
+  border:none;
+  -webkit-user-select:none;
+     -moz-user-select:none;
+      -ms-user-select:none;
+          user-select:none;
+  cursor:pointer;
+  position:absolute;
+  top:20px;
+  right:15px;
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  background:transparent;
+  pointer-events:auto;
+  margin:0;
+  padding:0;
+}

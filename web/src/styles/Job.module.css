@@ -1,0 +1,29 @@
+._root_1dhv2_4:not(:last-of-type){
+    padding-bottom:0.5rem;
+  }
+
+._root_1dhv2_4 ._job_1dhv2_9{
+    width:100%;
+    max-width:40em;
+    margin:0 auto;
+    padding:0 1.5rem;
+    box-sizing:border-box
+  }
+
+@media (max-width: calc(1280px - 1px)){
+
+  ._root_1dhv2_4 ._job_1dhv2_9{
+      padding:0 !important
+  }
+  }
+
+._root_1dhv2_4 ._job_1dhv2_9 ._heading_1dhv2_20{
+      font-size:1.28571rem;
+      line-height:1.5;
+      margin:0.25em 0 0;
+    }
+
+._root_1dhv2_4 ._job_1dhv2_9 ._details_1dhv2_26{
+      font-size:1rem;
+      line-height:1.5;
+    }

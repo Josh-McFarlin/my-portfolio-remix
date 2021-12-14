@@ -1,0 +1,28 @@
+._root_1hcbu_4{
+  padding-bottom:2rem;
+}
+
+._root_1hcbu_4 ._section_1hcbu_7{
+    width:100%;
+    max-width:40em;
+    margin:0 auto;
+    padding:0 1.5rem;
+    box-sizing:border-box;
+    display:flex;
+    justify-content:center;
+  }
+
+._root_1hcbu_4 ._section_1hcbu_7 ._imageContainer_1hcbu_16{
+      position:relative;
+      overflow:hidden;
+    }
+
+._root_1hcbu_4 ._section_1hcbu_7 ._imageContainer_1hcbu_16 ._image_1hcbu_16{
+        border:1px solid black;
+        background:white;
+        margin:0 auto
+      }
+
+._root_1hcbu_4 ._section_1hcbu_7 ._imageContainer_1hcbu_16 ._image_1hcbu_16._circular_1hcbu_25{
+          border-radius:50%;
+        }

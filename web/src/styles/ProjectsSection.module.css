@@ -1,0 +1,23 @@
+._root_sf11d_4{
+  padding-bottom:2rem;
+}
+
+._root_sf11d_4 ._section_sf11d_7{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+  }
+
+._root_sf11d_4 ._section_sf11d_7 ._heading_sf11d_13{
+      font-size:1.5rem;
+      line-height:1.42857;
+      margin-top:0.25em;
+    }
+
+._root_sf11d_4 ._section_sf11d_7 ._projectList_sf11d_19{
+      width:100%;
+      max-width:50em;
+      padding:16px;
+      box-sizing:border-box;
+    }

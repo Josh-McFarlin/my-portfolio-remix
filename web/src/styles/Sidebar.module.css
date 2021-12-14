@@ -1,0 +1,27 @@
+._root_1nu04_4{
+  position:fixed;
+  top:0;
+  right:0;
+  bottom:0;
+  width:100vw;
+  height:100vh;
+  pointer-events:none;
+  z-index:5
+}
+
+@media (min-width: 600px){
+
+._root_1nu04_4{
+    display:none
+}
+  }
+
+._root_1nu04_4 ._background_1nu04_18{
+    background:#747fe0;
+    position:absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    width:70%;
+    height:100%;
+  }

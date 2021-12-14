@@ -1,0 +1,37 @@
+._root_r5772_4:not(:last-of-type){
+    padding-bottom:0.5rem;
+  }
+
+._root_r5772_4 ._school_r5772_9{
+    width:100%;
+    max-width:40em;
+    margin:0 auto;
+    padding:0 1.5rem;
+    box-sizing:border-box
+  }
+
+@media (max-width: calc(1280px - 1px)){
+
+  ._root_r5772_4 ._school_r5772_9{
+      padding:0 !important
+  }
+  }
+
+._root_r5772_4 ._school_r5772_9 ._heading_r5772_20{
+      font-size:1.28571rem;
+      line-height:1.5;
+      margin:0.25em 0 0;
+    }
+
+._root_r5772_4 ._school_r5772_9 ._details_r5772_26{
+      font-size:1rem;
+      line-height:1.5;
+    }
+
+._root_r5772_4 ._school_r5772_9 ul{
+      margin:0;
+    }
+
+._root_r5772_4 ._school_r5772_9 ul ._details_r5772_26{
+      margin-top:0.25em;
+    }

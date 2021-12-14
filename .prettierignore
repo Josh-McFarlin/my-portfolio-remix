@@ -1,0 +1,9 @@
+node_modules
+.idea_modules/
+.idea/
+
+web/node_modules
+web/dist/
+
+studio/node_modules
+studio/dist/

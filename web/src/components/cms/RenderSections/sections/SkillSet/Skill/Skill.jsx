@@ -1,0 +1,34 @@
+import React from "react";
+import PropTypes from "prop-types";
+import SanityImage from "../../../../SanityImage";
+import styles from "~/styles/Skill.module.json";
+
+const Skill = ({ name, image }) => (
+  <div className={styles.root}>
+    {image && (
+      <div className={styles.skillImage}>
+        <SanityImage
+          className={styles.image}
+          src={image}
+          width={26}
+          height={22}
+          objectFit="contain"
+          placeholder="empty"
+        />
+      </div>
+    )}
+    {name && <p className={styles.skillText}>{name}</p>}
+  </div>
+);
+
+Skill.propTypes = {
+  name: PropTypes.string,
+  image: PropTypes.object,
+};
+
+Skill.defaultProps = {
+  name: null,
+  image: null,
+};
+
+export default Skill;
