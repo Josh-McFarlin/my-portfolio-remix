@@ -1,15 +1,20 @@
 import React from "react";
-import PropTypes from "prop-types";
 import * as SectionComponents from "./sections";
 
-const resolveSections = (section) => {
+type Section = {
+  _type: string;
+  _key: string;
+  section: Record<any, any>;
+};
+
+const resolveSections = (section: Section): React.FC<Section> | null => {
   let upper = section._type;
-  if (typeof upper === "string" && upper.length > 0) {
+  if (upper.length > 0) {
     upper = upper[0].toUpperCase() + upper.slice(1);
   }
 
   // eslint-disable-next-line import/namespace
-  const Section = SectionComponents[upper];
+  const Section = (SectionComponents as Record<any, any>)[upper];
 
   if (Section) {
     return Section;
@@ -19,7 +24,11 @@ const resolveSections = (section) => {
   return null;
 };
 
-const RenderSections = ({ sections }) => {
+interface PropTypes {
+  sections: Section[];
+}
+
+const RenderSections: React.FC<PropTypes> = ({ sections }) => {
   if (!sections) {
     console.error("Missing section");
     return <div>Missing sections</div>;
@@ -38,16 +47,6 @@ const RenderSections = ({ sections }) => {
       })}
     </>
   );
-};
-
-RenderSections.propTypes = {
-  sections: PropTypes.arrayOf(
-    PropTypes.shape({
-      _type: PropTypes.string,
-      _key: PropTypes.string,
-      section: PropTypes.instanceOf(PropTypes.object),
-    })
-  ).isRequired,
 };
 
 export default RenderSections;

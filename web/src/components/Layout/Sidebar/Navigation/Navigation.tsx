@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { motion } from "framer-motion";
 import MenuItem from "../MenuItem";
 import styles from "~/styles/Navigation.module.json";
@@ -21,18 +20,21 @@ const variants = {
   },
 };
 
-const Navigation = ({ navItems, toggle }) => (
+interface NavigationProps {
+  navItems?: unknown[];
+  toggle(...args: unknown[]): unknown;
+}
+
+const Navigation = ({
+  navItems,
+  toggle
+}: NavigationProps) => (
   <motion.div className={styles.root} variants={variants}>
     {navItems.map((item) => (
       <MenuItem item={item} key={item._id} toggle={toggle} />
     ))}
   </motion.div>
 );
-
-Navigation.propTypes = {
-  navItems: PropTypes.array,
-  toggle: PropTypes.func.isRequired,
-};
 
 Navigation.defaultProps = {
   navItems: [],

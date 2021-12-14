@@ -1,7 +1,15 @@
 import React from "react";
-import PropTypes from "prop-types";
 import BlockContent from "../../../../BlockContent";
 import styles from "~/styles/Job.module.json";
+
+interface JobProps {
+  company: string;
+  position: string;
+  location: string;
+  startDate: string;
+  endDate: string;
+  description: object[];
+}
 
 const Job = ({
   company,
@@ -9,8 +17,8 @@ const Job = ({
   location,
   startDate,
   endDate,
-  description,
-}) => {
+  description
+}: JobProps) => {
   const startForm = new Date(startDate);
   const endForm = new Date(endDate);
 
@@ -65,15 +73,6 @@ const Job = ({
       </section>
     </div>
   );
-};
-
-Job.propTypes = {
-  company: PropTypes.string.isRequired,
-  position: PropTypes.string.isRequired,
-  location: PropTypes.string.isRequired,
-  startDate: PropTypes.string.isRequired,
-  endDate: PropTypes.string.isRequired,
-  description: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default Job;

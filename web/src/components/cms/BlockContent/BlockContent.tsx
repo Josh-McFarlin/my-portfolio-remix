@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import BlockContentPure from "@sanity/block-content-to-react";
 import client from "../../../utils/sanity/client";
 import InternalLink from "./InternalLink";
@@ -8,7 +7,16 @@ import Figure from "./Figure";
 
 const { projectId, dataset } = client.config();
 
-const BlockContent = ({ blocks, className, ...rest }) => {
+interface BlockContentProps {
+  blocks?: any;
+  className?: string;
+}
+
+const BlockContent = ({
+  blocks,
+  className,
+  ...rest
+}: BlockContentProps) => {
   if (!blocks) {
     // console.error('Missing blocks');
     return null;
@@ -33,11 +41,6 @@ const BlockContent = ({ blocks, className, ...rest }) => {
       {...rest}
     />
   );
-};
-
-BlockContent.propTypes = {
-  blocks: PropTypes.any,
-  className: PropTypes.string,
 };
 
 export default BlockContent;

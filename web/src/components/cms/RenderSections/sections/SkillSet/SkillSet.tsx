@@ -1,9 +1,16 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Skill from "./Skill";
 import styles from "~/styles/SkillSet.module.json";
 
-const SkillSet = ({ heading, skills }) => (
+interface SkillSetProps {
+  heading: string;
+  skills: object[];
+}
+
+const SkillSet = ({
+  heading,
+  skills
+}: SkillSetProps) => (
   <div className={styles.root}>
     <section className={styles.section}>
       <h1 className={styles.heading}>{heading}</h1>
@@ -15,10 +22,5 @@ const SkillSet = ({ heading, skills }) => (
     </section>
   </div>
 );
-
-SkillSet.propTypes = {
-  heading: PropTypes.string.isRequired,
-  skills: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
 
 export default SkillSet;

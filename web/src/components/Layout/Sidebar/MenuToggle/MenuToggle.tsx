@@ -1,6 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import PropTypes from "prop-types";
 import styles from "~/styles/MenuToggle.module.json";
 
 const variants = {
@@ -28,7 +27,13 @@ const Path = (props) => (
   />
 );
 
-const MenuToggle = ({ toggle }) => (
+interface MenuToggleProps {
+  toggle(...args: unknown[]): unknown;
+}
+
+const MenuToggle = ({
+  toggle
+}: MenuToggleProps) => (
   <button className={styles.root} onClick={toggle} type="button">
     <motion.svg width="23" height="23" viewBox="0 0 23 23" variants={variants}>
       <Path
@@ -77,9 +82,5 @@ const MenuToggle = ({ toggle }) => (
     </motion.svg>
   </button>
 );
-
-MenuToggle.propTypes = {
-  toggle: PropTypes.func.isRequired,
-};
 
 export default MenuToggle;

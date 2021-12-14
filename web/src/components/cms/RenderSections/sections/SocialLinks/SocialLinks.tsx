@@ -1,9 +1,20 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Icon as IconifyIcon } from "@iconify/react";
 import classes from "~/styles/SocialLinks.module.json";
 
-const TextSection = ({ linkedIn, gitHub, twitter, instagram }) => (
+interface TextSectionProps {
+  linkedIn?: string;
+  gitHub?: string;
+  twitter?: string;
+  instagram?: string;
+}
+
+const TextSection = ({
+  linkedIn,
+  gitHub,
+  twitter,
+  instagram
+}: TextSectionProps) => (
   <div className={classes.root}>
     <section className={classes.section}>
       {linkedIn && (
@@ -65,13 +76,6 @@ const TextSection = ({ linkedIn, gitHub, twitter, instagram }) => (
     </section>
   </div>
 );
-
-TextSection.propTypes = {
-  linkedIn: PropTypes.string,
-  gitHub: PropTypes.string,
-  twitter: PropTypes.string,
-  instagram: PropTypes.string,
-};
 
 TextSection.defaultProps = {
   linkedIn: null,

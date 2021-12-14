@@ -1,7 +1,16 @@
 import React from "react";
-import PropTypes from "prop-types";
 import BlockContent from "../../../BlockContent";
 import styles from "~/styles/School.module.json";
+
+interface SchoolProps {
+  name: string;
+  location: string;
+  startYear: string;
+  endYear: string;
+  description: object[];
+  completedCourses: string[];
+  currentCourses: string[];
+}
 
 const School = ({
   name,
@@ -10,8 +19,8 @@ const School = ({
   endYear,
   description,
   completedCourses,
-  currentCourses,
-}) => (
+  currentCourses
+}: SchoolProps) => (
   <div className={styles.root}>
     <section className={styles.school}>
       <h2 className={styles.heading}>{name}</h2>
@@ -48,15 +57,5 @@ const School = ({
     </section>
   </div>
 );
-
-School.propTypes = {
-  name: PropTypes.string.isRequired,
-  location: PropTypes.string.isRequired,
-  startYear: PropTypes.string.isRequired,
-  endYear: PropTypes.string.isRequired,
-  description: PropTypes.arrayOf(PropTypes.object).isRequired,
-  completedCourses: PropTypes.arrayOf(PropTypes.string).isRequired,
-  currentCourses: PropTypes.arrayOf(PropTypes.string).isRequired,
-};
 
 export default School;

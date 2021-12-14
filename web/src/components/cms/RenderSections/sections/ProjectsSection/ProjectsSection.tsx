@@ -1,9 +1,16 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Project from "./Project";
 import styles from "~/styles/ProjectsSection.module.json";
 
-const ProjectsSection = ({ heading, projects }) => (
+interface ProjectsSectionProps {
+  heading?: string;
+  projects: object[];
+}
+
+const ProjectsSection = ({
+  heading,
+  projects
+}: ProjectsSectionProps) => (
   <div className={styles.root}>
     <section className={styles.section}>
       {heading != null && <h1 className={styles.title}>{heading}</h1>}
@@ -15,11 +22,6 @@ const ProjectsSection = ({ heading, projects }) => (
     </section>
   </div>
 );
-
-ProjectsSection.propTypes = {
-  heading: PropTypes.string,
-  projects: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
 
 ProjectsSection.defaultProps = {
   heading: null,

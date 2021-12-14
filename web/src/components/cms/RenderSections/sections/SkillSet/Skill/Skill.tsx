@@ -1,9 +1,16 @@
 import React from "react";
-import PropTypes from "prop-types";
 import SanityImage from "../../../../SanityImage";
 import styles from "~/styles/Skill.module.json";
 
-const Skill = ({ name, image }) => (
+interface SkillProps {
+  name?: string;
+  image?: object;
+}
+
+const Skill = ({
+  name,
+  image
+}: SkillProps) => (
   <div className={styles.root}>
     {image && (
       <div className={styles.skillImage}>
@@ -20,11 +27,6 @@ const Skill = ({ name, image }) => (
     {name && <p className={styles.skillText}>{name}</p>}
   </div>
 );
-
-Skill.propTypes = {
-  name: PropTypes.string,
-  image: PropTypes.object,
-};
 
 Skill.defaultProps = {
   name: null,

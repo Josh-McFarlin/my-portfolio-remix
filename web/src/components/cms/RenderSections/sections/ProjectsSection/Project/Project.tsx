@@ -1,10 +1,23 @@
 import React from "react";
-import PropTypes from "prop-types";
 import BlockContent from "../../../../BlockContent";
 import SanityImage from "../../../../SanityImage";
 import styles from "~/styles/Project.module.json";
 
-const Project = ({ name, tags, description, image, links }) => (
+interface ProjectProps {
+  name: string;
+  tags?: string[];
+  description: unknown[];
+  image: object;
+  links?: object[];
+}
+
+const Project = ({
+  name,
+  tags,
+  description,
+  image,
+  links
+}: ProjectProps) => (
   <div className={styles.root}>
     <div className={styles.image}>
       <SanityImage src={image} layout="fill" objectFit="cover" />
@@ -39,14 +52,6 @@ const Project = ({ name, tags, description, image, links }) => (
     </div>
   </div>
 );
-
-Project.propTypes = {
-  name: PropTypes.string.isRequired,
-  tags: PropTypes.arrayOf(PropTypes.string),
-  description: PropTypes.array.isRequired,
-  image: PropTypes.object.isRequired,
-  links: PropTypes.arrayOf(PropTypes.object),
-};
 
 Project.defaultProps = {
   links: [],

@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import clsx from "clsx";
 import { Link, useLocation, useSearchParams } from "remix";
 import urls from "../../../utils/urls";
@@ -11,7 +10,20 @@ const conditionalJoin = (slug) => {
   return typeof slug === "string" ? slug : slug.join("/");
 };
 
-const Header = ({ name = "Missing name", navItems }) => {
+interface HeaderProps {
+  name: string;
+  navItems?: {
+    title?: string,
+    slug?: {
+      current?: string
+    }
+  }[];
+}
+
+const Header = ({
+  name = "Missing name",
+  navItems
+}: HeaderProps) => {
   const location = useLocation();
   const [query] = useSearchParams();
 
@@ -70,18 +82,6 @@ const Header = ({ name = "Missing name", navItems }) => {
       </nav>
     </div>
   );
-};
-
-Header.propTypes = {
-  name: PropTypes.string.isRequired,
-  navItems: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string,
-      slug: PropTypes.shape({
-        current: PropTypes.string,
-      }),
-    })
-  ),
 };
 
 Header.defaultProps = {

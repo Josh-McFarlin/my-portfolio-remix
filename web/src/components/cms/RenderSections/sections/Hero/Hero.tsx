@@ -1,11 +1,22 @@
 import React from "react";
-import PropTypes from "prop-types";
 import BlockContent from "../../../BlockContent";
 import Cta from "../../../../Cta";
 import SanityImage from "../../../SanityImage";
 import styles from "~/styles/Hero.module.json";
 
-const Hero = ({ heading, backgroundImage, tagline, ctas }) => (
+interface HeroProps {
+  heading: string;
+  backgroundImage: object;
+  tagline: unknown[];
+  ctas: object[];
+}
+
+const Hero = ({
+  heading,
+  backgroundImage,
+  tagline,
+  ctas
+}: HeroProps) => (
   <div className={styles.root}>
     <div className={styles.content}>
       <h1 className={styles.title}>{heading}</h1>
@@ -25,12 +36,5 @@ const Hero = ({ heading, backgroundImage, tagline, ctas }) => (
     </div>
   </div>
 );
-
-Hero.propTypes = {
-  heading: PropTypes.string.isRequired,
-  backgroundImage: PropTypes.object.isRequired,
-  tagline: PropTypes.array.isRequired,
-  ctas: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
 
 export default Hero;

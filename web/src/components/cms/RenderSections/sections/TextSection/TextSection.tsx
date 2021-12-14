@@ -1,9 +1,18 @@
 import React from "react";
-import PropTypes from "prop-types";
 import BlockContent from "../../../BlockContent";
 import styles from "~/styles/TextSection.module.json";
 
-const TextSection = ({ heading, label, text }) => (
+interface TextSectionProps {
+  heading: string;
+  label?: string;
+  text: object[];
+}
+
+const TextSection = ({
+  heading,
+  label,
+  text
+}: TextSectionProps) => (
   <div className={styles.root}>
     <section className={styles.section}>
       <div className={styles.label}>{label}</div>
@@ -12,12 +21,6 @@ const TextSection = ({ heading, label, text }) => (
     </section>
   </div>
 );
-
-TextSection.propTypes = {
-  heading: PropTypes.string.isRequired,
-  label: PropTypes.string,
-  text: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
 
 TextSection.defaultProps = {
   label: "",

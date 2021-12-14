@@ -1,9 +1,16 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Job from "./Job";
 import styles from "~/styles/WorkExperience.module.json";
 
-const WorkExperience = ({ heading, jobs }) => (
+interface WorkExperienceProps {
+  heading: string;
+  jobs: object[];
+}
+
+const WorkExperience = ({
+  heading,
+  jobs
+}: WorkExperienceProps) => (
   <div className={styles.root}>
     <section className={styles.workExperience}>
       <h1 className={styles.heading}>{heading}</h1>
@@ -15,10 +22,5 @@ const WorkExperience = ({ heading, jobs }) => (
     </section>
   </div>
 );
-
-WorkExperience.propTypes = {
-  heading: PropTypes.string.isRequired,
-  jobs: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
 
 export default WorkExperience;

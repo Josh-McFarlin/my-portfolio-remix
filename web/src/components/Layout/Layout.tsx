@@ -1,11 +1,21 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Header from "./Header";
 import Footer from "./Footer";
 import Sidebar from "./Sidebar";
 import classes from "~/styles/Layout.module.json";
 
-const Layout = ({ preview, siteConfig, children, ...rest }) => {
+interface LayoutProps {
+  preview?: boolean;
+  siteConfig?: any;
+  children?: React.ReactNode;
+}
+
+const Layout = ({
+  preview,
+  siteConfig,
+  children,
+  ...rest
+}: LayoutProps) => {
   if (siteConfig?.config == null) {
     console.error("Missing config");
 
@@ -55,12 +65,6 @@ const Layout = ({ preview, siteConfig, children, ...rest }) => {
       </>
     </>
   );
-};
-
-Layout.propTypes = {
-  preview: PropTypes.bool,
-  siteConfig: PropTypes.any,
-  children: PropTypes.node,
 };
 
 export default Layout;

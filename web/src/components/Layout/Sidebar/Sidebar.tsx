@@ -1,6 +1,5 @@
 import React from "react";
 import { motion, useCycle } from "framer-motion";
-import PropTypes from "prop-types";
 import useComponentSize from "@rehooks/component-size";
 import MenuToggle from "./MenuToggle";
 import Navigation from "./Navigation";
@@ -40,7 +39,13 @@ const backgroundVariants = {
   },
 };
 
-const Sidebar = ({ navItems }) => {
+interface SidebarProps {
+  navItems?: unknown[];
+}
+
+const Sidebar = ({
+  navItems
+}: SidebarProps) => {
   const [isOpen, toggleOpen] = useCycle(false, true);
   const containerRef = React.useRef(null);
   const { height } = useComponentSize(containerRef);
@@ -63,10 +68,6 @@ const Sidebar = ({ navItems }) => {
       </motion.div>
     </motion.nav>
   );
-};
-
-Sidebar.propTypes = {
-  navItems: PropTypes.array,
 };
 
 Sidebar.defaultProps = {

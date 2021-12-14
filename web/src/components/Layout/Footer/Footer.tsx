@@ -1,11 +1,23 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Link, useLocation, useSearchParams } from "remix";
 import BlockContent from "../../cms/BlockContent";
 import urls from "../../../utils/urls";
 import styles from "~/styles/Footer.module.json";
 
-const Footer = ({ navItems, text }) => {
+interface FooterProps {
+  navItems?: {
+    title: string,
+    slug: {
+      current?: string
+    }
+  }[];
+  text?: object[];
+}
+
+const Footer = ({
+  navItems,
+  text
+}: FooterProps) => {
   const location = useLocation();
   const [query] = useSearchParams();
 
@@ -43,18 +55,6 @@ const Footer = ({ navItems, text }) => {
       </div>
     </div>
   );
-};
-
-Footer.propTypes = {
-  navItems: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      slug: PropTypes.shape({
-        current: PropTypes.string,
-      }).isRequired,
-    })
-  ),
-  text: PropTypes.arrayOf(PropTypes.object),
 };
 
 Footer.defaultProps = {

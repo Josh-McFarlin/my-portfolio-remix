@@ -1,10 +1,17 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 import School from "./School";
 import styles from "~/styles/Education.module.json";
 
-const Education = ({ heading, schools }) => (
+interface EducationProps {
+  heading: string;
+  schools: object[];
+}
+
+const Education = ({
+  heading,
+  schools
+}: EducationProps) => (
   <div className={styles.root}>
     <section className={styles.education}>
       <h1 className={styles.heading}>{heading}</h1>
@@ -16,10 +23,5 @@ const Education = ({ heading, schools }) => (
     </section>
   </div>
 );
-
-Education.propTypes = {
-  heading: PropTypes.string.isRequired,
-  schools: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
 
 export default Education;

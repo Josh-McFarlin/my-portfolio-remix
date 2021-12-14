@@ -1,10 +1,18 @@
 import React from "react";
-import PropTypes from "prop-types";
 import clsx from "clsx";
 import SanityImage from "../../../SanityImage";
 import styles from "~/styles/BasicImage.module.json";
 
-const BasicImage = (props) => {
+interface BasicImageProps {
+  image: object;
+  circular?: boolean;
+  width?: number;
+  maxWidth?: number;
+  height?: number;
+  maxHeight?: number;
+}
+
+const BasicImage = (props: BasicImageProps) => {
   if (props.image.image == null) {
     return null;
   }
@@ -33,15 +41,6 @@ const BasicImage = (props) => {
       </section>
     </div>
   );
-};
-
-BasicImage.propTypes = {
-  image: PropTypes.object.isRequired,
-  circular: PropTypes.bool,
-  width: PropTypes.number,
-  maxWidth: PropTypes.number,
-  height: PropTypes.number,
-  maxHeight: PropTypes.number,
 };
 
 BasicImage.defaultProps = {

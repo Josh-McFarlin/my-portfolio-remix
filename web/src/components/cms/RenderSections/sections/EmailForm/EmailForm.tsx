@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import React from "react";
 
 import styles from "~/styles/EmailForm.module.json";
@@ -8,7 +7,15 @@ const encode = (data) =>
     .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
     .join("&");
 
-const EmailForm = ({ heading, subtitle }) => {
+interface EmailFormProps {
+  heading?: string;
+  subtitle?: string;
+}
+
+const EmailForm = ({
+  heading,
+  subtitle
+}: EmailFormProps) => {
   const [botField, setBotField] = React.useState("");
   const [name, setName] = React.useState("");
   const [replyTo, setReplyTo] = React.useState("");
@@ -118,11 +125,6 @@ const EmailForm = ({ heading, subtitle }) => {
       </div>
     </section>
   );
-};
-
-EmailForm.propTypes = {
-  heading: PropTypes.string,
-  subtitle: PropTypes.string,
 };
 
 EmailForm.defaultProps = {

@@ -1,10 +1,23 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Link } from "remix";
 import urls from "../../utils/urls";
 import styles from "~/styles/Cta.module.json";
 
-const cta = ({ title, route, link }) => {
+interface ctaProps {
+  title: string;
+  route?: {
+    slug?: {
+      current?: string
+    }
+  };
+  link?: string;
+}
+
+const cta = ({
+  title,
+  route,
+  link
+}: ctaProps) => {
   if (route && route.slug && route.slug.current) {
     return (
       <Link to={urls.pages.sanityPage(route.slug.current)}>
@@ -22,16 +35,6 @@ const cta = ({ title, route, link }) => {
   }
 
   return <a className={styles.button}>{title}</a>;
-};
-
-cta.propTypes = {
-  title: PropTypes.string.isRequired,
-  route: PropTypes.shape({
-    slug: PropTypes.shape({
-      current: PropTypes.string,
-    }),
-  }),
-  link: PropTypes.string,
 };
 
 cta.defaultProps = {

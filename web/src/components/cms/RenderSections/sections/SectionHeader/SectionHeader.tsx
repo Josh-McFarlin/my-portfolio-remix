@@ -1,9 +1,18 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 import styles from "~/styles/SectionHeader.module.json";
 
-const SectionHeader = ({ header, align, size }) => (
+interface SectionHeaderProps {
+  header: string;
+  align?: string;
+  size?: string;
+}
+
+const SectionHeader = ({
+  header,
+  align,
+  size
+}: SectionHeaderProps) => (
   <div className={styles.root}>
     <section className={styles.section}>
       <h1 className={styles[`header-${size}`]} align={align}>
@@ -12,12 +21,6 @@ const SectionHeader = ({ header, align, size }) => (
     </section>
   </div>
 );
-
-SectionHeader.propTypes = {
-  header: PropTypes.string.isRequired,
-  align: PropTypes.string,
-  size: PropTypes.string,
-};
 
 SectionHeader.defaultProps = {
   align: "left",

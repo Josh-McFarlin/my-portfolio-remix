@@ -2,7 +2,6 @@ import React from "react";
 import clsx from "clsx";
 import { motion } from "framer-motion";
 import { Link, useLocation, useSearchParams } from "remix";
-import PropTypes from "prop-types";
 import Icon from "../../../cms/RenderSections/sections/Icon";
 import urls from "../../../../utils/urls";
 import styles from "~/styles/MenuItem.module.json";
@@ -40,7 +39,16 @@ const conditionalJoin = (slug) => {
   return typeof slug === "string" ? slug : slug.join("/");
 };
 
-const MenuItem = ({ item, toggle }) => {
+interface MenuItemProps {
+  item: object;
+  router: object;
+  toggle(...args: unknown[]): unknown;
+}
+
+const MenuItem = ({
+  item,
+  toggle
+}: MenuItemProps) => {
   const { slug, title, link, icon } = item;
   const location = useLocation();
   const [query] = useSearchParams();
@@ -80,12 +88,6 @@ const MenuItem = ({ item, toggle }) => {
       )}
     </motion.div>
   );
-};
-
-MenuItem.propTypes = {
-  item: PropTypes.object.isRequired,
-  router: PropTypes.object.isRequired,
-  toggle: PropTypes.func.isRequired,
 };
 
 export default MenuItem;

@@ -1,11 +1,30 @@
 import React from "react";
-import PropTypes from "prop-types";
 import BlockContent from "../../../BlockContent";
 import Cta from "../../../../Cta";
 import SanityImage from "../../../SanityImage";
 import styles from "~/styles/ImageSection.module.json";
 
-const ImageSection = ({ heading, label, text, image, cta }) => {
+interface ImageSectionProps {
+  heading: string;
+  label: string;
+  text: unknown[];
+  image: {
+    asset?: {
+      _ref?: string
+    }
+  };
+  backgroundImage: string;
+  tagline: string;
+  cta: object;
+}
+
+const ImageSection = ({
+  heading,
+  label,
+  text,
+  image,
+  cta
+}: ImageSectionProps) => {
   if (image == null) {
     return null;
   }
@@ -27,20 +46,6 @@ const ImageSection = ({ heading, label, text, image, cta }) => {
       </figure>
     </div>
   );
-};
-
-ImageSection.propTypes = {
-  heading: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  text: PropTypes.array.isRequired,
-  image: PropTypes.shape({
-    asset: PropTypes.shape({
-      _ref: PropTypes.string,
-    }),
-  }).isRequired,
-  backgroundImage: PropTypes.string.isRequired,
-  tagline: PropTypes.string.isRequired,
-  cta: PropTypes.object.isRequired,
 };
 
 export default ImageSection;
