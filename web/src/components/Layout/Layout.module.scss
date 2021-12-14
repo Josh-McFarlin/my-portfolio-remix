@@ -1,6 +1,18 @@
 @import "../../../styles/Colors";
 @import "../../../styles/Properties";
 
+.content {
+  width: 100%;
+  max-width: 1400px;
+  min-height: calc(100% - 70px);
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 16px;
+  overflow-x: hidden;
+  color: $primary-text-color;
+}
+
 .exitPreviewButton {
   position: fixed;
   bottom: 8px;

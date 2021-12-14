@@ -48,7 +48,7 @@ const Layout = ({ preview, siteConfig, children, ...rest }: LayoutProps) => {
       <>
         <Header name={name} logo={logo} navItems={mainNavigation} />
         <Sidebar navItems={mainNavigation} />
-        <div id="content" {...rest}>
+        <div className={classes.content} {...rest}>
           {children}
         </div>
         <Footer navItems={footerNavigation} text={footerText} />

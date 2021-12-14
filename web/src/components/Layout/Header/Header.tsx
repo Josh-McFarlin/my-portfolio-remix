@@ -40,10 +40,8 @@ const Header = ({ name = "Missing name", navItems }: HeaderProps) => {
   return (
     <div className={styles.root}>
       <h1 className={styles.branding}>
-        <Link to={urls.pages.index()}>
-          <a title={name}>
-            <h1 className={styles.title}>{name}</h1>
-          </a>
+        <Link to={urls.pages.index()} title={name}>
+          <h1 className={styles.title}>{name}</h1>
         </Link>
       </h1>
       <nav className={styles.nav}>
@@ -69,7 +67,7 @@ const Header = ({ name = "Missing name", navItems }: HeaderProps) => {
                       to={urls.pages.sanityPage(item.slug.current)}
                       prefetch={item.prefetch ? "intent" : "none"}
                     >
-                      <a>{title}</a>
+                      {title}
                     </Link>
                   )}
                 </li>

@@ -183,7 +183,7 @@
         padding:1.5rem 0.5rem;
       }
 
-._root_1lvvm_4{
+._root_z4vq2_4{
   position:relative;
   color:#202123;
   display:flex;
@@ -198,12 +198,12 @@
   padding:8px 0;
 }
 
-._root_1lvvm_4 a{
+._root_z4vq2_4 a{
     color:inherit;
     text-decoration:inherit;
   }
 
-._root_1lvvm_4 ._branding_1lvvm_23{
+._root_z4vq2_4 ._branding_z4vq2_23{
     font-size:inherit;
     font-weight:inherit;
     text-transform:uppercase;
@@ -213,35 +213,35 @@
     flex:1;
   }
 
-._root_1lvvm_4 ._branding_1lvvm_23 a{
+._root_z4vq2_4 ._branding_z4vq2_23 a{
       display:block;
       padding:0.5em 0
     }
 
 @media (max-width: calc(1280px - 1px)){
 
-    ._root_1lvvm_4 ._branding_1lvvm_23 a{
+    ._root_z4vq2_4 ._branding_z4vq2_23 a{
         padding:12px 8px
     }
   }
 
-._root_1lvvm_4 ._branding_1lvvm_23 ._title_1lvvm_41{
+._root_z4vq2_4 ._branding_z4vq2_23 ._title_z4vq2_41{
       margin:0;
       font-size:1.71429rem;
     }
 
-._root_1lvvm_4 ._nav_1lvvm_47{
+._root_z4vq2_4 ._nav_z4vq2_47{
     flex:1
   }
 
 @media (max-width: calc(1280px - 1px)){
 
-  ._root_1lvvm_4 ._nav_1lvvm_47{
+  ._root_z4vq2_4 ._nav_z4vq2_47{
       display:none
   }
   }
 
-._root_1lvvm_4 ._nav_1lvvm_47 ._navItems_1lvvm_54{
+._root_z4vq2_4 ._nav_z4vq2_47 ._navItems_z4vq2_54{
       padding:0;
       margin:0;
       height:100%
@@ -249,7 +249,7 @@
 
 @media (min-width: 600px){
 
-    ._root_1lvvm_4 ._nav_1lvvm_47 ._navItems_1lvvm_54{
+    ._root_z4vq2_4 ._nav_z4vq2_47 ._navItems_z4vq2_54{
         display:flex;
         justify-content:center;
         padding:0 1rem
@@ -258,20 +258,20 @@
 
 @supports (padding-top: env(safe-area-inset-top)){
 
-    ._root_1lvvm_4 ._nav_1lvvm_47 ._navItems_1lvvm_54{
+    ._root_z4vq2_4 ._nav_z4vq2_47 ._navItems_z4vq2_54{
         padding-right:calc(env(safe-area-inset-right) + 1rem)
     }
       }
 
-._root_1lvvm_4 ._nav_1lvvm_47 ._navItems_1lvvm_54 ._navItem_1lvvm_54{
+._root_z4vq2_4 ._nav_z4vq2_47 ._navItems_z4vq2_54 ._navItem_z4vq2_54{
         display:flex;
         white-space:nowrap;
         align-items:stretch;
         padding:0 !important;
-        line-height:1.5 * 1.5rem;
+        line-height:2.25rem;
       }
 
-._root_1lvvm_4 ._nav_1lvvm_47 ._navItems_1lvvm_54 ._navItem_1lvvm_54 a{
+._root_z4vq2_4 ._nav_z4vq2_47 ._navItems_z4vq2_54 ._navItem_z4vq2_54 a{
           display:block;
           position:relative;
           padding:0 0.75rem;
@@ -282,18 +282,18 @@
 
 @media (max-width: calc(1280px - 1px)){
 
-        ._root_1lvvm_4 ._nav_1lvvm_47 ._navItems_1lvvm_54 ._navItem_1lvvm_54 a{
+        ._root_z4vq2_4 ._nav_z4vq2_47 ._navItems_z4vq2_54 ._navItem_z4vq2_54 a{
             padding:1rem 1.5rem;
             width:100%;
             box-sizing:border-box;
             text-align:right;
         }
 
-            ._root_1lvvm_4 ._nav_1lvvm_47 ._navItems_1lvvm_54 ._navItem_1lvvm_54 a ::before{
+            ._root_z4vq2_4 ._nav_z4vq2_47 ._navItems_z4vq2_54 ._navItem_z4vq2_54 a ::before{
               display:none;
             }
 
-            ._root_1lvvm_4 ._nav_1lvvm_47 ._navItems_1lvvm_54 ._navItem_1lvvm_54 a ._active_1lvvm_94::before{
+            ._root_z4vq2_4 ._nav_z4vq2_47 ._navItems_z4vq2_54 ._navItem_z4vq2_54 a ._active_z4vq2_94::before{
               display:block;
               content:"";
               width:100%;
@@ -307,7 +307,7 @@
 
 @media (min-width: 600px){
 
-      ._root_1lvvm_4 ._nav_1lvvm_47 ._navItems_1lvvm_54 ._navItem_1lvvm_54{
+      ._root_z4vq2_4 ._nav_z4vq2_47 ._navItems_z4vq2_54 ._navItem_z4vq2_54{
           margin-left:0.5rem
       }
   }
@@ -498,7 +498,19 @@
       line-height:1.5;
     }
 
-._exitPreviewButton_1yxeq_4{
+._content_407kd_4{
+  width:100%;
+  max-width:1400px;
+  min-height:calc(100% - 70px);
+  display:flex;
+  flex-direction:column;
+  margin:0 auto;
+  padding:16px;
+  overflow-x:hidden;
+  color:#2f2f2f;
+}
+
+._exitPreviewButton_407kd_16{
   position:fixed;
   bottom:8px;
   right:8px;
@@ -511,7 +523,7 @@
   font-weight:600
 }
 
-._exitPreviewButton_1yxeq_4:not(:hover){
+._exitPreviewButton_407kd_16:not(:hover){
     text-decoration:none;
     opacity:0.5;
   }
