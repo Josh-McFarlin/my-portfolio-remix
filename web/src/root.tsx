@@ -30,19 +30,21 @@ export const loader: LoaderFunction = async ({ request }) => {
   const preview =
     requestUrl?.searchParams?.get("preview") === SANITY_PREVIEW_SECRET;
 
-  const siteConfig = await getSiteConfig(preview);
+  const siteConfig = await getSiteConfig(preview, SANITY_API_TOKEN);
 
   return {
+    environment: NODE_ENV,
     preview,
     siteConfig,
   };
 };
 
 export default function App() {
-  const { preview, siteConfig } = useLoaderData();
+  const { environment, preview, siteConfig } = useLoaderData();
 
   return (
     <Document
+      environment={environment}
       title={siteConfig?.config?.name || "Portfolio"}
       preview={preview}
       siteConfig={siteConfig}

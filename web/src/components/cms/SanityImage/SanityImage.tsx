@@ -1,9 +1,11 @@
 import React from "react";
+import clsx from "clsx";
 import type { UseNextSanityImageOptions } from "next-sanity-image";
 import { useInView } from "react-intersection-observer";
 import { useNextSanityImage } from "next-sanity-image";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
-import client from "../../../utils/sanity/client";
+import { client } from "~/utils/sanity/client";
+import styles from "@/SanityImage.module.css";
 
 type PropTypes = React.HTMLProps<HTMLImageElement> & {
   src: SanityImageSource;
@@ -14,6 +16,7 @@ type PropTypes = React.HTMLProps<HTMLImageElement> & {
 };
 
 const SanityImage: React.FC<PropTypes> = ({
+  className,
   src,
   options,
   layout,
@@ -22,44 +25,40 @@ const SanityImage: React.FC<PropTypes> = ({
   ...rest
 }) => {
   const { ref, inView } = useInView({
-    triggerOnce: false,
+    triggerOnce: true,
     threshold: 0,
   });
-
-  const [isBlurred, setIsBlurred] = React.useState<boolean>(true);
   const imageProps = useNextSanityImage(client, src, options);
-
-  // console.log("sou", src);
-  //  console.log("imageProps", imageProps);
+  const [imageSrc, setImageSrc] = React.useState<string>(
+    imageProps?.blurDataURL || ""
+  );
+  const [isBlurred, setIsBlurred] = React.useState<boolean>(true);
 
   React.useEffect(() => {
-    console.log("ref", ref);
-    console.log("inview", inView);
-    // if (inView) {
-    //   image.setAttribute("src", image.getAttribute("data-src"));
-    //
-    //   image.onload = () => {
-    //     image.removeAttribute("data-src");
-    //   };
-    // }
-  }, [ref, inView]);
+    if (imageProps != null && inView) {
+      const img = new Image();
 
-  // console.log("inview", inView);
+      img.src = imageProps.src;
+      img.onload = () => {
+        setImageSrc(img.src);
+        setIsBlurred(false);
+      };
+    }
+  }, [imageProps, inView]);
 
   return (
-    <img
-      width={imageProps.width}
-      height={imageProps.height}
-      ref={ref}
-      src={imageProps.blurDataURL ?? ""}
-      data-src={imageProps.src}
-      style={{
-        filter: isBlurred ? "blur(20px)" : "none",
-        transition: isBlurred ? "none" : "filter 0.3s ease-out",
-      }}
-      alt={(src as any)?.alt || ""}
-      {...rest}
-    />
+    <div className={styles.root}>
+      <img
+        data-objectfit={objectFit}
+        className={clsx(styles.image, isBlurred && styles.blurred, className)}
+        width={imageProps.width}
+        height={imageProps.height}
+        ref={ref}
+        src={imageSrc}
+        alt={(src as any)?.alt || ""}
+        {...rest}
+      />
+    </div>
   );
 };
 

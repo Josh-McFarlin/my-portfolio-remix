@@ -53,9 +53,13 @@ const pageQuery = `
   }[0]
 `;
 
-export const getPage = async (slug = "/", preview = false) => {
+export const getPage = async (
+  slug = "/",
+  preview = false,
+  previewToken?: string
+) => {
   const fixedSlug = convertSlug(slug);
-  const client = getClient(preview);
+  const client = getClient(preview, previewToken);
 
   const data =
     slug === "/"

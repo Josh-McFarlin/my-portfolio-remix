@@ -11,7 +11,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   const preview =
     requestUrl?.searchParams?.get("preview") === SANITY_PREVIEW_SECRET;
 
-  const page = await getPage(params?.slug, preview);
+  const page = await getPage(params?.slug, preview, SANITY_API_TOKEN);
 
   return {
     preview,

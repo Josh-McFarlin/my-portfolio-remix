@@ -2,6 +2,7 @@ import React from "react";
 import { Links, LiveReload, Meta, Scripts } from "remix";
 
 interface PropTypes {
+  environment?: "development" | "production";
   title?: string;
   preview?: boolean;
   siteConfig?: {
@@ -15,6 +16,7 @@ interface PropTypes {
 
 const Document: React.FC<PropTypes> = ({
   children,
+  environment = "development",
   title,
   preview = false,
   siteConfig = {},
@@ -60,7 +62,7 @@ const Document: React.FC<PropTypes> = ({
       <body>
         {children}
         <Scripts />
-        {NODE_ENV === "development" && <LiveReload />}
+        {environment === "development" && <LiveReload />}
       </body>
     </html>
   );

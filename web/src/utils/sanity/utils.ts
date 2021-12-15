@@ -1,5 +1,5 @@
 import React from "react";
-import { options } from "./client";
+import { config } from "./client";
 
 export const convertSlug = (slug) => {
   if (slug == null) return undefined;
@@ -7,6 +7,11 @@ export const convertSlug = (slug) => {
   return typeof slug === "string" ? slug : slug.join("/");
 };
 
+/**
+ * @link https://github.com/SimeonGriggs/sanity-remix-preview/blob/main/web/app/lib/sanity/usePreviewSubscription.js
+ * @param query
+ * @param subscriptionOptions
+ */
 export function usePreviewSubscription(query, subscriptionOptions) {
   const { params, initialData } = subscriptionOptions;
   const [data, setData] = React.useState(initialData);
@@ -22,7 +27,7 @@ export function usePreviewSubscription(query, subscriptionOptions) {
         default: { groqStore },
       } = await import("@sanity/groq-store");
 
-      const { projectId, dataset } = options;
+      const { projectId, dataset } = config;
 
       store = groqStore({
         projectId,

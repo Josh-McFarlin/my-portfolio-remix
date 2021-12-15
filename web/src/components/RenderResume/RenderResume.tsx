@@ -1,6 +1,6 @@
 import React from "react";
-import client from "../../utils/sanity/client";
 import SanityImage from "../cms/SanityImage";
+import { getClient } from "~/utils/sanity/client";
 import styles from "@/RenderResume.module.css";
 
 const Loader = () => <div className={styles.loading}>Loading Resume...</div>;
@@ -33,7 +33,7 @@ const RenderResume = ({ first, second, image, link, pdf }) => {
 
   React.useEffect(() => {
     if (pdf != null) {
-      client
+      getClient()
         .fetch(`*[_id == "${pdf.asset._ref}"][0]`)
         .then(({ url }) => setPdfLink(url));
     }

@@ -1,7 +1,7 @@
 import { getClient, imageBuilder } from "../client";
 
-export const getSiteConfig = async (preview = false) => {
-  const config = await getClient(preview).fetch(`
+export const getSiteConfig = async (preview = false, previewToken?: string) => {
+  const config = await getClient(preview, previewToken).fetch(`
     *[_id == "global-config"] {
       ...,
       mainNavigation[] {
