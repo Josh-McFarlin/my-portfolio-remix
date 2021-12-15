@@ -30,7 +30,7 @@ const SanityImage: React.FC<PropTypes> = ({
   const imageProps = useNextSanityImage(client, src, options);
 
   // console.log("sou", src);
-  // console.log("imageProps", imageProps);
+  //  console.log("imageProps", imageProps);
 
   React.useEffect(() => {
     console.log("ref", ref);
@@ -44,22 +44,20 @@ const SanityImage: React.FC<PropTypes> = ({
     // }
   }, [ref, inView]);
 
-  console.log("inview", inView);
+  // console.log("inview", inView);
 
   return (
     <img
+      width={imageProps.width}
+      height={imageProps.height}
       ref={ref}
       src={imageProps.blurDataURL ?? ""}
       data-src={imageProps.src}
       style={{
-        width: 200,
         filter: isBlurred ? "blur(20px)" : "none",
         transition: isBlurred ? "none" : "filter 0.3s ease-out",
       }}
       alt={(src as any)?.alt || ""}
-      onLoad={(e) => {
-        //
-      }}
       {...rest}
     />
   );

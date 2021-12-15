@@ -1,16 +1,18 @@
 import React from "react";
-import type { ErrorBoundaryComponent } from "remix";
-import { Meta, Links, Scripts, LiveReload, useCatch } from "remix";
+import type { ErrorBoundaryComponent, LoaderFunction } from "remix";
+import { useCatch, useLoaderData } from "remix";
 import { Outlet } from "react-router-dom";
 // eslint-disable-next-line import/extensions,import/no-unassigned-import
 import "focus-visible/dist/focus-visible.min.js";
-
 import normalizeUrl from "normalize.css";
 import stylesUrl from "./styles/global.css";
 import AppCss from "./styles/App.css";
 import ColorCSS from "./styles/Colors.css";
 import ComponentCSS from "./styles/Components.css";
 import ModulesCSS from "./styles/modules.css";
+import Document from "~/components/Document";
+import Layout from "~/components/Layout";
+import { getSiteConfig } from "~/utils/sanity/actions/siteConfig";
 
 export function links() {
   return [
@@ -23,27 +25,31 @@ export function links() {
   ];
 }
 
-const Document: React.FC<{ title?: string }> = ({ children, title }) => (
-  <html lang="en">
-    <head>
-      <meta charSet="utf-8" />
-      <link rel="icon" href="/favicon.png" type="image/png" />
-      {title ? <title>{title}</title> : null}
-      <Meta />
-      <Links />
-    </head>
-    <body>
-      {children}
-      <Scripts />
-      {NODE_ENV === "development" && <LiveReload />}
-    </body>
-  </html>
-);
+export const loader: LoaderFunction = async ({ request }) => {
+  const requestUrl = new URL(request?.url);
+  const preview =
+    requestUrl?.searchParams?.get("preview") === SANITY_PREVIEW_SECRET;
+
+  const siteConfig = await getSiteConfig(preview);
+
+  return {
+    preview,
+    siteConfig,
+  };
+};
 
 export default function App() {
+  const { preview, siteConfig } = useLoaderData();
+
   return (
-    <Document>
-      <Outlet />
+    <Document
+      title={siteConfig?.config?.name || "Portfolio"}
+      preview={preview}
+      siteConfig={siteConfig}
+    >
+      <Layout preview={preview} siteConfig={siteConfig}>
+        <Outlet />
+      </Layout>
     </Document>
   );
 }

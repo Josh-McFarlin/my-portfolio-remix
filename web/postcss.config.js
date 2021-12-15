@@ -5,7 +5,7 @@ module.exports = {
   plugins: [
     require("postcss-calc"),
     require("precss"),
-    require("autoprefixer"),
+    // require("autoprefixer"),
     require("postcss-strip-inline-comments"),
     require("postcss-discard-comments"),
     require("postcss-modules")({
@@ -18,6 +18,9 @@ module.exports = {
           await fs.writeFile(`${outputFilename}.json`, JSON.stringify(json));
         }
       },
+    }),
+    require("cssnano")({
+      preset: "default",
     }),
   ],
 };
