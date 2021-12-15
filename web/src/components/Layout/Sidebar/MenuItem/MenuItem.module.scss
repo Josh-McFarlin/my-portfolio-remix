@@ -9,6 +9,11 @@
   border: 3px solid white;
   border-radius: 10px;
   box-sizing: border-box;
+  text-decoration: none;
+
+  a {
+    text-decoration: none;
+  }
 
   .container {
     display: flex;

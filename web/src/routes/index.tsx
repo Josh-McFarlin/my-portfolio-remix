@@ -4,24 +4,35 @@ import { useLoaderData } from "remix";
 import RenderSections from "~/components/cms/RenderSections";
 import RenderResume from "~/components/RenderResume";
 import { getPage } from "~/utils/sanity/actions/page";
+import { usePreviewSubscription } from "~/utils/sanity/utils";
 
 export const loader: LoaderFunction = async ({ request, params }) => {
   const requestUrl = new URL(request?.url);
-  const queryParams = { slug: params.slug };
   const preview =
     requestUrl?.searchParams?.get("preview") === SANITY_PREVIEW_SECRET;
 
-  const page = await getPage(params?.slug, preview, SANITY_API_TOKEN);
+  const { data, query, queryParams } = await getPage(
+    params?.slug,
+    preview,
+    SANITY_API_TOKEN
+  );
 
   return {
+    environment: NODE_ENV,
     preview,
+    data,
+    query: preview ? query : null,
     queryParams: preview ? queryParams : null,
-    page,
   };
 };
 
 const IndexPage = () => {
-  const { page } = useLoaderData();
+  const { preview, data, query, queryParams } = useLoaderData();
+  const { data: page } = usePreviewSubscription(query, {
+    preview,
+    params: queryParams,
+    initialData: data,
+  });
 
   const { content = [], resume } = page;
 

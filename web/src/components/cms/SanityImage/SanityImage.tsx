@@ -47,18 +47,16 @@ const SanityImage: React.FC<PropTypes> = ({
   }, [imageProps, inView]);
 
   return (
-    <div className={styles.root}>
-      <img
-        data-objectfit={objectFit}
-        className={clsx(styles.image, isBlurred && styles.blurred, className)}
-        width={imageProps.width}
-        height={imageProps.height}
-        ref={ref}
-        src={imageSrc}
-        alt={(src as any)?.alt || ""}
-        {...rest}
-      />
-    </div>
+    <img
+      data-objectfit={objectFit}
+      className={clsx(styles.image, isBlurred && styles.blurred, className)}
+      width={imageProps.width}
+      height={imageProps.height}
+      ref={ref}
+      src={imageSrc}
+      alt={(src as any)?.alt || ""}
+      {...rest}
+    />
   );
 };
 

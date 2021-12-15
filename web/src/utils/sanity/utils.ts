@@ -1,7 +1,9 @@
 import React from "react";
+import { groqStore } from "@sanity/groq-store";
+import type { GroqStore, Subscription } from "@sanity/groq-store";
 import { config } from "./client";
 
-export const convertSlug = (slug) => {
+export const convertSlug = (slug: string | string[] | null) => {
   if (slug == null) return undefined;
 
   return typeof slug === "string" ? slug : slug.join("/");
@@ -12,21 +14,24 @@ export const convertSlug = (slug) => {
  * @param query
  * @param subscriptionOptions
  */
-export function usePreviewSubscription(query, subscriptionOptions) {
-  const { params, initialData } = subscriptionOptions;
-  const [data, setData] = React.useState(initialData);
+export const usePreviewSubscription = <D>(
+  query: string,
+  subscriptionOptions: {
+    preview: boolean;
+    params: Record<any, any>;
+    initialData: D;
+  }
+): {
+  data: D;
+} => {
+  const { preview, params, initialData } = subscriptionOptions;
+  const [data, setData] = React.useState<D>(initialData);
 
   React.useEffect(() => {
-    let sub;
-    let store;
+    let sub: Subscription;
+    let store: GroqStore;
 
     async function createStore() {
-      // For more details about configuring groq-store see:
-      // https://www.npmjs.com/package/@sanity/groq-store
-      const {
-        default: { groqStore },
-      } = await import("@sanity/groq-store");
-
       const { projectId, dataset } = config;
 
       store = groqStore({
@@ -37,29 +42,34 @@ export function usePreviewSubscription(query, subscriptionOptions) {
         documentLimit: 1000,
       });
 
-      store.subscribe(
+      sub = store.subscribe(
         query,
         params ?? {}, // Params
         (err, result) => {
           if (err) {
             console.error("Oh no, an error:", err);
+            console.log(query);
             return;
           }
+
           setData(result);
+          console.log("Res", result);
         }
       );
     }
 
-    if (!store) {
+    if (preview && !store) {
       createStore();
     }
 
     return () => {
-      if (sub?.unsubscribe()) sub.unsubscribe();
+      if (sub) sub.unsubscribe();
       if (store) store.close();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [preview, params]);
 
-  return { data };
-}
+  return {
+    data,
+  };
+};

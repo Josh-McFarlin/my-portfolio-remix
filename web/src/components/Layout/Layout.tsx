@@ -7,13 +7,11 @@ import classes from "@/Layout.module.css";
 interface PropTypes {
   preview?: boolean;
   siteConfig?: {
-    config: {
-      name: string;
-      mainNavigation: any;
-      footerNavigation: any;
-      footerText: any;
-      logo: any;
-    };
+    name: string;
+    mainNavigation: any;
+    footerNavigation: any;
+    footerText: any;
+    logo: any;
   };
 }
 
@@ -23,14 +21,14 @@ const Layout: React.FC<PropTypes> = ({
   children,
   ...rest
 }) => {
-  if (siteConfig?.config == null) {
+  if (siteConfig == null) {
     console.error("Missing config");
 
     return <div>Missing config</div>;
   }
 
-  const { config } = siteConfig;
-  const { name, mainNavigation, footerNavigation, footerText, logo } = config;
+  const { name, mainNavigation, footerNavigation, footerText, logo } =
+    siteConfig;
 
   return (
     <>

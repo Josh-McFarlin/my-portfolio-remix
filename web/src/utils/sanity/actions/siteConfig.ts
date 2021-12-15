@@ -1,7 +1,7 @@
+import { groq } from "@sanity/groq-store";
 import { getClient, imageBuilder } from "../client";
 
-export const getSiteConfig = async (preview = false, previewToken?: string) => {
-  const config = await getClient(preview, previewToken).fetch(`
+const siteConfigQuery = groq`
     *[_id == "global-config"] {
       ...,
       mainNavigation[] {
@@ -19,7 +19,52 @@ export const getSiteConfig = async (preview = false, previewToken?: string) => {
         }[0]
       }
     }[0]
-  `);
+  `;
+
+const siteConfigParams = {};
+
+export const getSiteConfig = async (
+  preview = false,
+  previewToken?: string
+): Promise<{
+  query: string;
+  queryParams: Record<any, any>;
+  data: {
+    name: string;
+    mainNavigation: any;
+    footerNavigation: any;
+    footerText: any;
+    logo: any;
+  };
+}> => {
+  const config = await getClient(preview, previewToken).fetch(
+    siteConfigQuery,
+    siteConfigParams
+  );
+
+  return {
+    query: siteConfigQuery,
+    queryParams: siteConfigParams,
+    data: config,
+  };
+};
+
+export const getSiteFavicons = async (
+  preview = false,
+  previewToken?: string
+): Promise<{
+  query: string;
+  queryParams: Record<any, any>;
+  data: {
+    appleIconUrl: string;
+    thirtyIconUrl: string;
+    sixIconUrl: string;
+  };
+}> => {
+  const config = await getClient(preview, previewToken).fetch(
+    siteConfigQuery,
+    siteConfigParams
+  );
 
   const favicons = {
     appleIconUrl: imageBuilder
@@ -45,7 +90,8 @@ export const getSiteConfig = async (preview = false, previewToken?: string) => {
   };
 
   return {
-    config,
-    favicons,
+    query: siteConfigQuery,
+    queryParams: siteConfigParams,
+    data: favicons,
   };
 };

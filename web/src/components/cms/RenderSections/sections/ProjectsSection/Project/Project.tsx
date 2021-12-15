@@ -13,8 +13,13 @@ interface ProjectProps {
 
 const Project = ({ name, tags, description, image, links }: ProjectProps) => (
   <div className={styles.root}>
-    <div className={styles.image}>
-      <SanityImage src={image} layout="fill" objectFit="cover" />
+    <div className={styles.imageContainer}>
+      <SanityImage
+        className={styles.image}
+        src={image}
+        layout="fill"
+        objectFit="cover"
+      />
     </div>
     <div className={styles.content}>
       <h1 className={styles.title}>{name}</h1>

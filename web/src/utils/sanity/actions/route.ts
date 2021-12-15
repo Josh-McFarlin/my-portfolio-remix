@@ -1,8 +1,5 @@
 import { getClient } from "../client";
 
-export const getAllRoutes = (preview = false, previewToken?: string) =>
-  getClient(preview, previewToken).fetch(`*[_type == "route"].slug.current`);
-
 export const getSitemapRoutes = () =>
   getClient(false).fetch(`
     {

@@ -1,50 +1,24 @@
-.root {
-  display: inline-block;
-  max-width: 100%;
-  overflow: hidden;
+.image {
   position: relative;
-  box-sizing: border-box;
-  margin: 0px;
+  overflow: hidden;
+  filter: none;
+  transition: filter 0.3s ease-out;
+  object-fit: fill;
 
-  .image {
-    //position: absolute;
-    inset: 0px;
-    box-sizing: border-box;
-    padding: 0px;
-    border: none;
-    margin: auto;
-    display: block;
-    width: 0px;
-    height: 0px;
-    min-width: 100%;
-    max-width: 100%;
-    min-height: 100%;
-    max-height: 100%;
+  &[data-objectfit="contain"] {
+    object-fit: contain;
+  }
+
+  &[data-objectfit="cover"] {
     object-fit: cover;
-    filter: none;
-    background-size: cover;
-    background-image: none;
-    background-position: 0% 0%;
+  }
 
-    filter: none;
-    transition: filter 0.3s ease-out;
+  &[data-objectfit="fill"] {
     object-fit: fill;
+  }
 
-    &[data-objectfit="contain"] {
-      object-fit: contain;
-    }
-
-    &[data-objectfit="cover"] {
-      object-fit: cover;
-    }
-
-    &[data-objectfit="fill"] {
-      object-fit: fill;
-    }
-
-    &.blurred {
-      filter: blur(20px);
-      transition: none;
-    }
+  &.blurred {
+    filter: blur(20px);
+    transition: none;
   }
 }

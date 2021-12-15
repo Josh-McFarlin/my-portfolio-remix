@@ -1,7 +1,8 @@
+import { groq } from "@sanity/groq-store";
 import { getClient, imageBuilder } from "../client";
 import { convertSlug } from "../utils";
 
-const pageData = `
+const pageData = groq`
   ...,
   content[] {
     ...,
@@ -25,7 +26,7 @@ const pageData = `
   }
 `;
 
-const frontPageQuery = `
+const frontPageQuery = groq`
   *[_id == "global-config"] | order(_updatedAt desc) {
     ...select(
       $preview == true =>
@@ -39,7 +40,7 @@ const frontPageQuery = `
   }[0]
 `;
 
-const pageQuery = `
+const pageQuery = groq`
   *[_type == "route" && slug.current == $slug] {
     ...select(
       $preview == true =>
@@ -57,19 +58,18 @@ export const getPage = async (
   slug = "/",
   preview = false,
   previewToken?: string
-) => {
+): Promise<{
+  query: string;
+  queryParams: Record<any, any>;
+  data: any;
+}> => {
   const fixedSlug = convertSlug(slug);
   const client = getClient(preview, previewToken);
 
-  const data =
-    slug === "/"
-      ? await client.fetch(frontPageQuery, {
-          preview,
-        })
-      : await client.fetch(pageQuery, {
-          slug: fixedSlug,
-          preview,
-        });
+  const query = slug === "/" ? frontPageQuery : pageQuery;
+  const queryParams = slug === "/" ? { preview } : { slug: fixedSlug, preview };
+
+  const data = await client.fetch(query, queryParams);
 
   const openGraphImages = data.openGraphImage
     ? [
@@ -109,8 +109,12 @@ export const getPage = async (
     : [];
 
   return {
-    slug: fixedSlug,
-    ...data,
-    openGraphImages,
+    query,
+    queryParams,
+    data: {
+      slug: fixedSlug,
+      ...data,
+      openGraphImages,
+    },
   };
 };

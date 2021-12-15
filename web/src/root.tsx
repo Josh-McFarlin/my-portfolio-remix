@@ -12,7 +12,11 @@ import ComponentCSS from "./styles/Components.css";
 import ModulesCSS from "./styles/modules.css";
 import Document from "~/components/Document";
 import Layout from "~/components/Layout";
-import { getSiteConfig } from "~/utils/sanity/actions/siteConfig";
+import {
+  getSiteConfig,
+  getSiteFavicons,
+} from "~/utils/sanity/actions/siteConfig";
+import { usePreviewSubscription } from "~/utils/sanity/utils";
 
 export function links() {
   return [
@@ -22,6 +26,10 @@ export function links() {
     { rel: "stylesheet", href: ColorCSS },
     { rel: "stylesheet", href: ComponentCSS },
     { rel: "stylesheet", href: ModulesCSS },
+    {
+      rel: "stylesheet",
+      href: "https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap",
+    },
   ];
 }
 
@@ -30,24 +38,37 @@ export const loader: LoaderFunction = async ({ request }) => {
   const preview =
     requestUrl?.searchParams?.get("preview") === SANITY_PREVIEW_SECRET;
 
-  const siteConfig = await getSiteConfig(preview, SANITY_API_TOKEN);
+  const { data: favicons } = await getSiteFavicons(preview, SANITY_API_TOKEN);
+  const { data, query, queryParams } = await getSiteConfig(
+    preview,
+    SANITY_API_TOKEN
+  );
 
   return {
     environment: NODE_ENV,
     preview,
-    siteConfig,
+    favicons,
+    data,
+    query: preview ? query : null,
+    queryParams: preview ? queryParams : null,
   };
 };
 
 export default function App() {
-  const { environment, preview, siteConfig } = useLoaderData();
+  const { environment, preview, favicons, data, query, queryParams } =
+    useLoaderData();
+  const { data: siteConfig } = usePreviewSubscription(query, {
+    preview,
+    params: queryParams,
+    initialData: data,
+  });
 
   return (
     <Document
       environment={environment}
-      title={siteConfig?.config?.name || "Portfolio"}
+      title={siteConfig?.name || "Portfolio"}
       preview={preview}
-      siteConfig={siteConfig}
+      favicons={favicons}
     >
       <Layout preview={preview} siteConfig={siteConfig}>
         <Outlet />
