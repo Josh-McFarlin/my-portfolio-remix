@@ -1,9 +1,9 @@
-const fixSlug = (slug) => slug?.replace(/^\//, "");
+const fixSlug = (slug: string): string => slug?.replace(/^\//, "");
 
 const urls = {
   pages: {
     index: () => `/`,
-    sanityPage: (slug) => `/${fixSlug(slug)}`,
+    sanityPage: (slug: string): string => `/${fixSlug(slug)}`,
   },
 };
 

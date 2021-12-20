@@ -5,6 +5,7 @@ interface PropTypes {
   environment?: "development" | "production";
   title?: string;
   preview?: boolean;
+  lang?: string;
   favicons?: {
     appleIconUrl: string;
     thirtyIconUrl: string;
@@ -17,9 +18,10 @@ const Document: React.FC<PropTypes> = ({
   environment = "development",
   title,
   preview = false,
+  lang = "en",
   favicons = {},
 }) => (
-  <html lang="en">
+  <html lang={lang ?? "en"}>
     <head>
       <meta charSet="utf-8" />
       <meta
@@ -57,6 +59,11 @@ const Document: React.FC<PropTypes> = ({
     <body>
       {children}
       <Scripts />
+      <noscript>
+        <style>{`
+          .hideNoJS { display: none; }
+        `}</style>
+      </noscript>
       {environment === "development" && <LiveReload />}
     </body>
   </html>

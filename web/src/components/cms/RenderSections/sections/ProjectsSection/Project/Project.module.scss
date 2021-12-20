@@ -24,7 +24,7 @@
     background: white;
     overflow: hidden;
 
-    @include breakpoint-below-large {
+    @include breakpoint-below-medium {
       display: none;
     }
 

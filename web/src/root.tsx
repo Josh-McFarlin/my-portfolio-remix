@@ -68,6 +68,7 @@ export default function App() {
       environment={environment}
       title={siteConfig?.name || "Portfolio"}
       preview={preview}
+      lang={siteConfig?.lang || "en"}
       favicons={favicons}
     >
       <Layout preview={preview} siteConfig={siteConfig}>
@@ -106,10 +107,7 @@ export const ErrorBoundary: ErrorBoundaryComponent = ({ error }) => {
     <Document title="Uh-oh!">
       <h1>App Error</h1>
       <pre>{error.message}</pre>
-      <p>
-        Replace this UI with what you want users to see when your app throws
-        uncaught errors.
-      </p>
+      <p>An error has occurred, please try again later!</p>
     </Document>
   );
 };

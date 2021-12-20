@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import { Link, useLocation, useSearchParams } from "remix";
 import Icon from "../../../cms/RenderSections/sections/Icon";
 import urls from "../../../../utils/urls";
-import styles from "@/MenuItem.module.css";
+import styles from "./MenuItem.module.scss";
+import { convertSlug } from "~/utils/sanity/utils";
 
 const variants = {
   open: {
@@ -33,20 +34,21 @@ const variants = {
   },
 };
 
-const conditionalJoin = (slug) => {
-  if (slug === undefined) return undefined;
-
-  return typeof slug === "string" ? slug : slug.join("/");
-};
-
 interface MenuItemProps {
-  item: object;
-  router: object;
-  toggle(...args: unknown[]): unknown;
+  item: {
+    title: string;
+    slug?: {
+      current: string;
+    };
+    link?: string;
+    icon?: string;
+    prefetch?: boolean;
+  };
+  toggle: () => void;
 }
 
-const MenuItem = ({ item, toggle }: MenuItemProps) => {
-  const { slug, title, link, icon } = item;
+const MenuItem: React.FC<MenuItemProps> = ({ item, toggle }) => {
+  const { title, slug, link, icon } = item;
   const location = useLocation();
   const [query] = useSearchParams();
 
@@ -54,7 +56,7 @@ const MenuItem = ({ item, toggle }: MenuItemProps) => {
   if ("slug" in item && item.slug != null) {
     isActive =
       (location.pathname === urls.pages.sanityPage() &&
-        conditionalJoin(query.get("slug")) === item.slug.current) ||
+        convertSlug(query.get("slug")) === item.slug.current) ||
       location.pathname === item.slug.current;
   }
 
@@ -68,17 +70,17 @@ const MenuItem = ({ item, toggle }: MenuItemProps) => {
           rel="noopener noreferrer"
         >
           <div className={styles.container}>
-            <Icon type={icon} className={styles.icon} />
+            {icon != null && <Icon type={icon} className={styles.icon} />}
             <p className={styles.text}>{title}</p>
           </div>
         </a>
       ) : (
         <Link
-          to={urls.pages.sanityPage(item.slug.current)}
+          to={urls.pages.sanityPage(slug.current)}
           prefetch={item.prefetch ? "intent" : "none"}
         >
           <div className={clsx(styles.container, isActive && styles.active)}>
-            <Icon type={icon} className={styles.icon} />
+            {icon != null && <Icon type={icon} className={styles.icon} />}
             <p className={styles.text}>{title}</p>
           </div>
         </Link>

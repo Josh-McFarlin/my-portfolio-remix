@@ -19,7 +19,7 @@
     "@sanity/default-login": "^2.22.0",
     "@sanity/desk-tool": "^2.22.2",
     "@sanity/google-maps-input": "^2.22.0",
-    "@sanity/vision": "^2.22.0",
+    "@sanity/vision": "^2.23.2",
     "bcp47": "^1.1.2",
     "prop-types": "^15.7",
     "react": "^17.0",

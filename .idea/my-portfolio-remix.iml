@@ -6,6 +6,11 @@
       <excludeFolder url="file://$MODULE_DIR$/.tmp" />
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
       <excludeFolder url="file://$MODULE_DIR$/.husky/_" />
+      <excludeFolder url="file://$MODULE_DIR$/web/public/build" />
+      <excludeFolder url="file://$MODULE_DIR$/web/.cache" />
+      <excludeFolder url="file://$MODULE_DIR$/web/.mf" />
+      <excludeFolder url="file://$MODULE_DIR$/web/build" />
+      <excludeFolder url="file://$MODULE_DIR$/web/dist" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

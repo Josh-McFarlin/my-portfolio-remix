@@ -7,7 +7,8 @@ import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { client } from "~/utils/sanity/client";
 import styles from "@/SanityImage.module.css";
 
-type PropTypes = React.HTMLProps<HTMLImageElement> & {
+type PropTypes = {
+  className?: string;
   src: SanityImageSource;
   options?: UseNextSanityImageOptions;
   layout?: "responsive" | "intrinsic" | "fixed" | "fill";
@@ -22,11 +23,11 @@ const SanityImage: React.FC<PropTypes> = ({
   layout,
   objectFit,
   sizes,
-  ...rest
 }) => {
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0,
+    rootMargin: "50px",
   });
   const imageProps = useNextSanityImage(client, src, options);
   const [imageSrc, setImageSrc] = React.useState<string>(
@@ -47,16 +48,33 @@ const SanityImage: React.FC<PropTypes> = ({
   }, [imageProps, inView]);
 
   return (
-    <img
-      data-objectfit={objectFit}
-      className={clsx(styles.image, isBlurred && styles.blurred, className)}
-      width={imageProps.width}
-      height={imageProps.height}
-      ref={ref}
-      src={imageSrc}
-      alt={(src as any)?.alt || ""}
-      {...rest}
-    />
+    <div ref={ref} className={styles.root}>
+      <img
+        data-objectfit={objectFit}
+        className={clsx(
+          "hideNoJS",
+          styles.image,
+          isBlurred && styles.blurred,
+          className
+        )}
+        width={imageProps.width}
+        height={imageProps.height}
+        src={imageSrc}
+        alt={(src as any)?.alt || ""}
+      />
+      <noscript>
+        <img
+          loading="lazy"
+          data-objectfit={objectFit}
+          className={clsx(styles.image, className)}
+          width={imageProps.width}
+          height={imageProps.height}
+          ref={ref}
+          src={imageProps.src}
+          alt={(src as any)?.alt || ""}
+        />
+      </noscript>
+    </div>
   );
 };
 

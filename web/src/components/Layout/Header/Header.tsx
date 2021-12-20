@@ -15,7 +15,7 @@ interface HeaderProps {
   navItems?: {
     title?: string;
     slug?: {
-      current?: string;
+      current: string;
     };
   }[];
 }

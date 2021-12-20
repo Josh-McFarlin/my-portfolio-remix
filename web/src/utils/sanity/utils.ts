@@ -3,7 +3,9 @@ import { groqStore } from "@sanity/groq-store";
 import type { GroqStore, Subscription } from "@sanity/groq-store";
 import { config } from "./client";
 
-export const convertSlug = (slug: string | string[] | null) => {
+export const convertSlug = (
+  slug: string | string[] | null
+): string | undefined => {
   if (slug == null) return undefined;
 
   return typeof slug === "string" ? slug : slug.join("/");

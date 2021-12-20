@@ -1,24 +1,34 @@
-.image {
+.root {
+  width: 100%;
+  height: 100%;
+  display: block;
   position: relative;
   overflow: hidden;
-  filter: none;
-  transition: filter 0.3s ease-out;
-  object-fit: fill;
 
-  &[data-objectfit="contain"] {
-    object-fit: contain;
-  }
-
-  &[data-objectfit="cover"] {
-    object-fit: cover;
-  }
-
-  &[data-objectfit="fill"] {
+  .image {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    filter: none;
+    transition: filter 0.3s ease-out;
     object-fit: fill;
-  }
 
-  &.blurred {
-    filter: blur(20px);
-    transition: none;
+    &[data-objectfit="contain"] {
+      object-fit: contain;
+    }
+
+    &[data-objectfit="cover"] {
+      object-fit: cover;
+    }
+
+    &[data-objectfit="fill"] {
+      object-fit: fill;
+    }
+
+    &.blurred {
+      filter: blur(20px);
+      transition: none;
+    }
   }
 }

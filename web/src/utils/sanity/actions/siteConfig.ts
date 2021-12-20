@@ -31,6 +31,7 @@ export const getSiteConfig = async (
   queryParams: Record<any, any>;
   data: {
     name: string;
+    lang?: string;
     mainNavigation: any;
     footerNavigation: any;
     footerText: any;
