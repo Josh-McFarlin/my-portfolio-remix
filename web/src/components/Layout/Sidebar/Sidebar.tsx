@@ -2,7 +2,7 @@ import React from "react";
 import { motion, useCycle } from "framer-motion";
 import MenuToggle from "./MenuToggle";
 import Navigation from "./Navigation";
-import styles from "@/Sidebar.module.css";
+import styles from "./Sidebar.module.scss.json";
 
 const sidebarVariants = {
   open: {
@@ -39,7 +39,15 @@ const backgroundVariants = {
 };
 
 interface SidebarProps {
-  navItems?: unknown[];
+  navItems?: {
+    _id: string;
+    title: string;
+    slug?: {
+      current: string;
+    };
+    link?: string;
+    prefetch?: boolean;
+  }[];
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ navItems = [] }) => {

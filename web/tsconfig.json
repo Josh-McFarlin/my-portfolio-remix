@@ -14,17 +14,7 @@
       "~/*": ["./src/*"],
       "@/*": ["./src/styles/*"]
     },
-    "noEmit": true,
-    "plugins": [
-      {
-        "name": "typescript-plugin-css-modules",
-        "options": {
-          "postcssOptions": {
-            "useConfig": true
-          }
-        }
-      }
-    ]
+    "noEmit": true
   },
-  "include": ["remix.env.d.ts", "declarations.d.ts", "**/*.ts", "**/*.tsx"]
+  "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx"]
 }

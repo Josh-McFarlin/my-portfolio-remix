@@ -1,6 +1,6 @@
 import React from "react";
 import BlockContent from "../../../../BlockContent";
-import styles from "@/Job.module.css";
+import styles from "./Job.module.scss.json";
 
 interface JobProps {
   company: string;

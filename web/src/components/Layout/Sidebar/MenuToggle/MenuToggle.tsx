@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import styles from "@/MenuToggle.module.css";
+import styles from "./MenuToggle.module.scss.json";
 
 const variants = {
   open: {

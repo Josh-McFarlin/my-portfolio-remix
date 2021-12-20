@@ -12,7 +12,7 @@ module.exports = {
           "~": `${__dirname}/src`,
           "@": `${__dirname}/src/styles`,
         },
-        extensions: [".ts", ".js", ".jsx", ".tsx", ".json"],
+        extensions: [".ts", ".js", ".jsx", ".tsx", ".json", ".scss", ".css"],
       },
     },
   },
@@ -31,6 +31,12 @@ module.exports = {
     },
   ],
   rules: {
-    "import/extensions": ["error", "never"],
+    "import/extensions": [
+      "error",
+      "never",
+      {
+        css: "always",
+      },
+    ],
   },
 };

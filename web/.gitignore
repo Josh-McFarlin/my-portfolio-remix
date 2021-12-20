@@ -12,3 +12,5 @@ node_modules
 
 src/styles/generated
 src/styles/**/*.json
+
+src/components/**/*.module.scss.json

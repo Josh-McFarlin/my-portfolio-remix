@@ -1,6 +1,6 @@
 import React from "react";
 import BlockContent from "../../../BlockContent";
-import styles from "@/TextSection.module.css";
+import styles from "./TextSection.module.scss.json";
 
 interface TextSectionProps {
   heading: string;
@@ -8,7 +8,11 @@ interface TextSectionProps {
   text: object[];
 }
 
-const TextSection = ({ heading, label, text }: TextSectionProps) => (
+const TextSection: React.FC<TextSectionProps> = ({
+  heading,
+  label = "",
+  text,
+}) => (
   <div className={styles.root}>
     <section className={styles.section}>
       <div className={styles.label}>{label}</div>
@@ -17,9 +21,5 @@ const TextSection = ({ heading, label, text }: TextSectionProps) => (
     </section>
   </div>
 );
-
-TextSection.defaultProps = {
-  label: "",
-};
 
 export default TextSection;

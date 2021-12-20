@@ -1,14 +1,14 @@
 import React from "react";
 import clsx from "clsx";
 import { Icon as IconifyIcon } from "@iconify/react";
-import classes from "@/Icon.module.css";
+import classes from "./Icon.module.scss.json";
 
 interface IconProps {
   type: string;
   className?: string;
 }
 
-const Icon = ({ type, className, ...rest }: IconProps) => {
+const Icon: React.FC<IconProps> = ({ type, className, ...rest }) => {
   switch (type) {
     case "Person": {
       return (

@@ -1,7 +1,7 @@
 import React from "react";
 import BlockContent from "../../../../BlockContent";
 import SanityImage from "../../../../SanityImage";
-import styles from "@/Project.module.css";
+import styles from "./Project.module.scss.json";
 
 interface ProjectProps {
   name: string;
@@ -11,7 +11,13 @@ interface ProjectProps {
   links?: object[];
 }
 
-const Project = ({ name, tags, description, image, links }: ProjectProps) => (
+const Project: React.FC<ProjectProps> = ({
+  name,
+  tags,
+  description,
+  image,
+  links,
+}) => (
   <div className={styles.root}>
     <div className={styles.imageContainer}>
       <SanityImage

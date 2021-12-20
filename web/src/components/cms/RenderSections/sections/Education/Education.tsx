@@ -1,14 +1,14 @@
 import React from "react";
 
 import School from "./School";
-import styles from "@/Education.module.css";
+import styles from "./Education.module.scss.json";
 
 interface EducationProps {
   heading: string;
   schools: object[];
 }
 
-const Education = ({ heading, schools }: EducationProps) => (
+const Education: React.FC<EducationProps> = ({ heading, schools }) => (
   <div className={styles.root}>
     <section className={styles.education}>
       <h1 className={styles.heading}>{heading}</h1>

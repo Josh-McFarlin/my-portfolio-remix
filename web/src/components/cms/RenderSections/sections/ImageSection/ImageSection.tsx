@@ -2,7 +2,7 @@ import React from "react";
 import BlockContent from "../../../BlockContent";
 import Cta from "../../../../Cta";
 import SanityImage from "../../../SanityImage";
-import styles from "@/ImageSection.module.css";
+import styles from "./ImageSection.module.scss.json";
 
 interface ImageSectionProps {
   heading: string;

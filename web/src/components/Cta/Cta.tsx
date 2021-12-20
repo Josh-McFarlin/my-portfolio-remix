@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "remix";
 import urls from "../../utils/urls";
-import styles from "@/Cta.module.css";
+import styles from "./Cta.module.scss.json";
 
 interface ctaProps {
   title: string;
@@ -13,7 +13,7 @@ interface ctaProps {
   link?: string;
 }
 
-const cta = ({ title, route, link }: ctaProps) => {
+const cta: React.FC<ctaProps> = ({ title, route, link }) => {
   if (route && route.slug && route.slug.current) {
     return (
       <Link to={urls.pages.sanityPage(route.slug.current)}>
@@ -31,11 +31,6 @@ const cta = ({ title, route, link }: ctaProps) => {
   }
 
   return <a className={styles.button}>{title}</a>;
-};
-
-cta.defaultProps = {
-  route: null,
-  link: null,
 };
 
 export default cta;

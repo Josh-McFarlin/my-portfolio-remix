@@ -1,6 +1,6 @@
 import React from "react";
 
-import styles from "@/EmailForm.module.css";
+import styles from "./EmailForm.module.scss.json";
 
 const encode = (data) =>
   Object.keys(data)
@@ -12,7 +12,7 @@ interface EmailFormProps {
   subtitle?: string;
 }
 
-const EmailForm = ({ heading, subtitle }: EmailFormProps) => {
+const EmailForm: React.FC<EmailFormProps> = ({ heading, subtitle }) => {
   const [botField, setBotField] = React.useState("");
   const [name, setName] = React.useState("");
   const [replyTo, setReplyTo] = React.useState("");

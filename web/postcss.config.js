@@ -1,6 +1,8 @@
 const path = require("path");
 const fs = require("fs-extra");
 
+const scssModuleRegex = /.module.[s]?css$/;
+
 module.exports = {
   plugins: [
     require("postcss-calc"),
@@ -14,8 +16,12 @@ module.exports = {
           .mkdir(path.dirname(outputFilename), { recursive: true })
           .catch(() => {});
 
-        if (Object.keys(json).length > 0) {
-          await fs.writeFile(`${outputFilename}.json`, JSON.stringify(json));
+        if (scssModuleRegex.test(cssFilename)) {
+          const jsonPath = cssFilename.endsWith(".module.scss")
+            ? `${cssFilename}.json`
+            : `${outputFilename}.json`;
+
+          await fs.writeFile(jsonPath, JSON.stringify(json || {}));
         }
       },
     }),

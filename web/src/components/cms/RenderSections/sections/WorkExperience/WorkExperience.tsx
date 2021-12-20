@@ -1,13 +1,13 @@
 import React from "react";
 import Job from "./Job";
-import styles from "@/WorkExperience.module.css";
+import styles from "./WorkExperience.module.scss.json";
 
 interface WorkExperienceProps {
   heading: string;
   jobs: object[];
 }
 
-const WorkExperience = ({ heading, jobs }: WorkExperienceProps) => (
+const WorkExperience: React.FC<WorkExperienceProps> = ({ heading, jobs }) => (
   <div className={styles.root}>
     <section className={styles.workExperience}>
       <h1 className={styles.heading}>{heading}</h1>

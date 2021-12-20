@@ -4,8 +4,8 @@ import type { UseNextSanityImageOptions } from "next-sanity-image";
 import { useInView } from "react-intersection-observer";
 import { useNextSanityImage } from "next-sanity-image";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import styles from "./SanityImage.module.scss.json";
 import { client } from "~/utils/sanity/client";
-import styles from "@/SanityImage.module.css";
 
 type PropTypes = {
   className?: string;
@@ -14,6 +14,7 @@ type PropTypes = {
   layout?: "responsive" | "intrinsic" | "fixed" | "fill";
   objectFit?: "fill" | "contain" | "cover";
   sizes?: string;
+  alt?: string;
 };
 
 const SanityImage: React.FC<PropTypes> = ({
@@ -23,6 +24,7 @@ const SanityImage: React.FC<PropTypes> = ({
   layout,
   objectFit,
   sizes,
+  alt,
 }) => {
   const { ref, inView } = useInView({
     triggerOnce: true,
@@ -60,7 +62,7 @@ const SanityImage: React.FC<PropTypes> = ({
         width={imageProps.width}
         height={imageProps.height}
         src={imageSrc}
-        alt={(src as any)?.alt || ""}
+        alt={alt || (src as any)?.alt || ""}
       />
       <noscript>
         <img
@@ -71,7 +73,7 @@ const SanityImage: React.FC<PropTypes> = ({
           height={imageProps.height}
           ref={ref}
           src={imageProps.src}
-          alt={(src as any)?.alt || ""}
+          alt={alt || (src as any)?.alt || ""}
         />
       </noscript>
     </div>

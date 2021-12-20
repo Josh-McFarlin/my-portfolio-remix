@@ -1,6 +1,6 @@
 import React from "react";
 
-import styles from "@/SectionHeader.module.css";
+import styles from "./SectionHeader.module.scss.json";
 
 interface SectionHeaderProps {
   header: string;
@@ -8,7 +8,11 @@ interface SectionHeaderProps {
   size?: string;
 }
 
-const SectionHeader = ({ header, align, size }: SectionHeaderProps) => (
+const SectionHeader: React.FC<SectionHeaderProps> = ({
+  header,
+  align,
+  size,
+}) => (
   <div className={styles.root}>
     <section className={styles.section}>
       <h1 className={styles[`header-${size}`]} align={align}>

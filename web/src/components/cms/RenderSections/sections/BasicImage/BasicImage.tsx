@@ -1,10 +1,10 @@
 import React from "react";
 import clsx from "clsx";
 import SanityImage from "../../../SanityImage";
-import styles from "@/BasicImage.module.css";
+import styles from "./BasicImage.module.scss.json";
 
 interface BasicImageProps {
-  image: object;
+  image: any;
   circular?: boolean;
   width?: number;
   maxWidth?: number;
@@ -12,17 +12,24 @@ interface BasicImageProps {
   maxHeight?: number;
 }
 
-const BasicImage = (props: BasicImageProps) => {
-  if (props.image.image == null) {
+const BasicImage: React.FC<BasicImageProps> = ({
+  image,
+  circular = false,
+  width,
+  maxWidth,
+  height,
+  maxHeight,
+}) => {
+  if (image.image == null) {
     return null;
   }
 
   const contStyle = {
-    borderRadius: props.circular ? "50%" : 0,
-    width: `${props.width}vw`,
-    height: `${props.height}vh`,
-    maxWidth: props.maxWidth,
-    maxHeight: props.maxHeight,
+    borderRadius: circular ? "50%" : 0,
+    width: `${width}vw`,
+    height: `${height}vh`,
+    maxWidth: maxWidth,
+    maxHeight: maxHeight,
   };
 
   return (
@@ -30,25 +37,15 @@ const BasicImage = (props: BasicImageProps) => {
       <section className={styles.section}>
         <div className={styles.imageContainer} style={contStyle}>
           <SanityImage
-            className={clsx(styles.image, props.circular && styles.circular)}
-            src={props.image}
+            className={clsx(styles.image, circular && styles.circular)}
+            src={image}
             layout="fill"
-            sizes={`${
-              props.maxWidth ? `(max-width: ${props.maxWidth}px) ` : ""
-            }${props.width}vw`}
+            sizes={`${maxWidth ? `(max-width: ${maxWidth}px) ` : ""}${width}vw`}
           />
         </div>
       </section>
     </div>
   );
-};
-
-BasicImage.defaultProps = {
-  circular: false,
-  width: null,
-  height: null,
-  maxWidth: null,
-  maxHeight: null,
 };
 
 export default BasicImage;

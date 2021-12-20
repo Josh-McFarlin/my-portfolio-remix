@@ -1,13 +1,13 @@
 import React from "react";
 import Skill from "./Skill";
-import styles from "@/SkillSet.module.css";
+import styles from "./SkillSet.module.scss.json";
 
 interface SkillSetProps {
   heading: string;
   skills: object[];
 }
 
-const SkillSet = ({ heading, skills }: SkillSetProps) => (
+const SkillSet: React.FC<SkillSetProps> = ({ heading, skills }) => (
   <div className={styles.root}>
     <section className={styles.section}>
       <h1 className={styles.heading}>{heading}</h1>

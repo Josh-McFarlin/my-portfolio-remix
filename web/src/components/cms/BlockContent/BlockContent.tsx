@@ -12,7 +12,11 @@ interface BlockContentProps {
   className?: string;
 }
 
-const BlockContent = ({ blocks, className, ...rest }: BlockContentProps) => {
+const BlockContent: React.FC<BlockContentProps> = ({
+  blocks,
+  className,
+  ...rest
+}) => {
   if (!blocks) {
     // console.error('Missing blocks');
     return null;

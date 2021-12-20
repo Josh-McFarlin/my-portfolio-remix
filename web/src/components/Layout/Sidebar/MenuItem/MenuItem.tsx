@@ -2,9 +2,9 @@ import React from "react";
 import clsx from "clsx";
 import { motion } from "framer-motion";
 import { Link, useLocation, useSearchParams } from "remix";
-import Icon from "../../../cms/RenderSections/sections/Icon";
-import urls from "../../../../utils/urls";
-import styles from "./MenuItem.module.scss";
+import styles from "./MenuItem.module.scss.json";
+import Icon from "~/components/cms/RenderSections/sections/Icon";
+import urls from "~/utils/urls";
 import { convertSlug } from "~/utils/sanity/utils";
 
 const variants = {

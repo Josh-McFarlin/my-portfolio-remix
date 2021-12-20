@@ -2,36 +2,37 @@ import React from "react";
 import clsx from "clsx";
 import { Link, useLocation, useSearchParams } from "remix";
 import urls from "../../../utils/urls";
-import styles from "@/Header.module.css";
-
-const conditionalJoin = (slug) => {
-  if (slug === undefined) return "";
-
-  return typeof slug === "string" ? slug : slug.join("/");
-};
+import styles from "./Header.module.scss.json";
+import { convertSlug } from "~/utils/sanity/utils";
 
 interface HeaderProps {
   name: string;
   navItems?: {
-    title?: string;
+    _id: string;
+    title: string;
     slug?: {
       current: string;
     };
+    link?: string;
+    prefetch?: boolean;
   }[];
 }
 
-const Header = ({ name = "Missing name", navItems }: HeaderProps) => {
+const Header: React.FC<HeaderProps> = ({
+  name = "Missing name",
+  navItems = [],
+}) => {
   const location = useLocation();
   const [query] = useSearchParams();
 
-  const isRouteActive = (item) => {
+  const isRouteActive = (item: string | { slug?: { current: string } }) => {
     if (typeof item === "string") return item === location.pathname;
 
     let isActive = false;
     if ("slug" in item && item.slug != null) {
       isActive =
         location.pathname === urls.pages.sanityPage() &&
-        conditionalJoin(query.get("slug")) === item.slug.current;
+        convertSlug(query.get("slug")) === item.slug.current;
     }
 
     return isActive;
@@ -46,41 +47,36 @@ const Header = ({ name = "Missing name", navItems }: HeaderProps) => {
       </h1>
       <nav className={styles.nav}>
         <ul className={styles.navItems}>
-          {navItems &&
-            navItems.map((item) => {
-              const { slug, title, link, _id } = item;
+          {navItems.map((item) => {
+            const { slug, title, link, _id } = item;
 
-              return (
-                <li
-                  key={_id}
-                  className={clsx(
-                    styles.navItem,
-                    isRouteActive(item) && styles.active
-                  )}
-                >
-                  {slug == null ? (
-                    <a href={link} target="_blank" rel="noopener noreferrer">
-                      {title}
-                    </a>
-                  ) : (
-                    <Link
-                      to={urls.pages.sanityPage(item.slug.current)}
-                      prefetch={item.prefetch ? "intent" : "none"}
-                    >
-                      {title}
-                    </Link>
-                  )}
-                </li>
-              );
-            })}
+            return (
+              <li
+                key={_id}
+                className={clsx(
+                  styles.navItem,
+                  isRouteActive(item) && styles.active
+                )}
+              >
+                {slug == null ? (
+                  <a href={link} target="_blank" rel="noopener noreferrer">
+                    {title}
+                  </a>
+                ) : (
+                  <Link
+                    to={urls.pages.sanityPage(slug.current)}
+                    prefetch={item.prefetch ? "intent" : "none"}
+                  >
+                    {title}
+                  </Link>
+                )}
+              </li>
+            );
+          })}
         </ul>
       </nav>
     </div>
   );
-};
-
-Header.defaultProps = {
-  navItems: [],
 };
 
 export default Header;

@@ -1,6 +1,6 @@
 import React from "react";
 import { Icon as IconifyIcon } from "@iconify/react";
-import classes from "@/SocialLinks.module.css";
+import classes from "./SocialLinks.module.scss.json";
 
 interface TextSectionProps {
   linkedIn?: string;

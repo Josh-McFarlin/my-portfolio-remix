@@ -1,6 +1,6 @@
 import React from "react";
 import BlockContent from "../../../BlockContent";
-import styles from "@/School.module.css";
+import styles from "./School.module.scss.json";
 
 interface SchoolProps {
   name: string;

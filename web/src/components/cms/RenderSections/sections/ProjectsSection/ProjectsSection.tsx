@@ -1,13 +1,16 @@
 import React from "react";
 import Project from "./Project";
-import styles from "@/ProjectsSection.module.css";
+import styles from "./ProjectsSection.module.scss.json";
 
 interface ProjectsSectionProps {
   heading?: string;
   projects: object[];
 }
 
-const ProjectsSection = ({ heading, projects }: ProjectsSectionProps) => (
+const ProjectsSection: React.FC<ProjectsSectionProps> = ({
+  heading,
+  projects,
+}) => (
   <div className={styles.root}>
     <section className={styles.section}>
       {heading != null && <h1 className={styles.title}>{heading}</h1>}
