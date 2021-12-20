@@ -10,7 +10,6 @@ module.exports = {
       "eslint-import-resolver-custom-alias": {
         alias: {
           "~": `${__dirname}/src`,
-          "@": `${__dirname}/src/styles`,
         },
         extensions: [".ts", ".js", ".jsx", ".tsx", ".json", ".scss", ".css"],
       },

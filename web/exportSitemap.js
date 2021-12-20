@@ -1,7 +1,17 @@
 const { Readable } = require("stream");
 const fsp = require("fs/promises");
 const { SitemapStream, streamToPromise } = require("sitemap");
-const client = require("./src/utils/sanity/node-client");
+const sanityClient = require("@sanity/client");
+
+const prod = process.env.NODE_ENV === "production";
+
+const client = sanityClient({
+  apiVersion: "2021-08-31",
+  projectId: "ai1hbij4",
+  dataset: "production",
+  token: "",
+  useCdn: prod,
+});
 
 const query = `
 {
