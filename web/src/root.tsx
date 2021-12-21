@@ -1,5 +1,10 @@
 import React from "react";
-import type { ErrorBoundaryComponent, LoaderFunction } from "remix";
+import type {
+  ErrorBoundaryComponent,
+  LoaderFunction,
+  MetaFunction,
+  LinksFunction,
+} from "remix";
 import { useCatch, useLoaderData } from "remix";
 import { Outlet } from "react-router-dom";
 // eslint-disable-next-line import/extensions,import/no-unassigned-import
@@ -19,7 +24,7 @@ import {
 import { usePreviewSubscription } from "~/utils/sanity/utils";
 import { getPage } from "~/utils/sanity/actions/page";
 
-export function links() {
+export const links: LinksFunction = () => {
   return [
     { rel: "stylesheet", href: stylesUrl },
     { rel: "stylesheet", href: normalizeUrl },
@@ -32,7 +37,7 @@ export function links() {
       href: "https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap",
     },
   ];
-}
+};
 
 export const loader: LoaderFunction = async ({ request, params }) => {
   const requestUrl = new URL(request?.url);
@@ -49,6 +54,32 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     favicons,
     siteConfig,
     page,
+  };
+};
+
+export const meta: MetaFunction = ({ data }: { data: any | undefined }) => {
+  if (!data) {
+    return {
+      title: "Portfolio",
+    } as any;
+  }
+
+  const { siteConfig, page } = data;
+
+  const title = `${siteConfig.data.name} | ${page.data.title}`;
+  const robots = page.data.disallowRobots ? "noindex,nofollow" : "index,follow";
+
+  return {
+    title,
+    robots,
+    googlebot: robots,
+    description: page.data.description,
+    "og:title": title,
+    "og:description": page.description,
+    "og:image": page.data.openGraphImages.map((i) => i.url),
+    "og:image:alt": page.data.openGraphImages.map((i) => i.alt || ""),
+    "og:image:width": page.data.openGraphImages.map((i) => i.width),
+    "og:image:height": page.data.openGraphImages.map((i) => i.height),
   };
 };
 
@@ -71,8 +102,6 @@ export default function App() {
       title={siteConfig?.name || "Portfolio"}
       lang={siteConfig?.lang || "en"}
       favicons={favicons}
-      siteConfig={siteConfigData}
-      page={pageData}
     >
       <Layout preview={preview} siteConfig={siteConfigData}>
         <Outlet context={[pageData, siteConfigData]} />

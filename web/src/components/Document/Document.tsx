@@ -1,6 +1,5 @@
 import React from "react";
 import { Links, LiveReload, Meta, Scripts } from "remix";
-import Seo from "../Seo";
 
 interface PropTypes {
   environment?: "development" | "production";
@@ -11,29 +10,6 @@ interface PropTypes {
     thirtyIconUrl: string;
     sixIconUrl: string;
   };
-  siteConfig?: {
-    name: string;
-    mainNavigation: any;
-    footerNavigation: any;
-    footerText: any;
-    logo: any;
-  };
-  page?: {
-    title: string;
-    description: string;
-    disallowRobots: boolean;
-    content: any[];
-    resume: any;
-    config: any;
-    socialLinks: any[];
-    slug: string;
-    openGraphImages: {
-      url: string;
-      alt: string;
-      width: number;
-      height: number;
-    }[];
-  };
 }
 
 const Document: React.FC<PropTypes> = ({
@@ -42,8 +18,6 @@ const Document: React.FC<PropTypes> = ({
   title,
   lang = "en",
   favicons = {},
-  siteConfig,
-  page,
 }) => (
   <html lang={lang ?? "en"}>
     <head>
@@ -76,11 +50,7 @@ const Document: React.FC<PropTypes> = ({
           href={favicons?.sixIconUrl}
         />
       )}
-      {siteConfig && page ? (
-        <Seo siteConfig={siteConfig} page={page} />
-      ) : (
-        <title>{title}</title>
-      )}
+      <title>{title}</title>
       <Meta />
       <Links />
     </head>

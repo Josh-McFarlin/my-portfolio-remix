@@ -30,8 +30,6 @@ const Seo: React.FC<PropTypes> = ({ siteConfig, page }) => {
   const title = `${siteConfig.name} | ${page.title}`;
   const robots = page.disallowRobots ? "noindex,nofollow" : "index,follow";
 
-  console.log("og", page.openGraphImages);
-
   return (
     <>
       <title>{title}</title>
