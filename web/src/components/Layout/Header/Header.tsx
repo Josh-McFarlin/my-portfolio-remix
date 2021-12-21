@@ -28,14 +28,9 @@ const Header: React.FC<HeaderProps> = ({
   const isRouteActive = (item: string | { slug?: { current: string } }) => {
     if (typeof item === "string") return item === location.pathname;
 
-    let isActive = false;
-    if ("slug" in item && item.slug != null) {
-      isActive =
-        location.pathname === urls.pages.sanityPage() &&
-        convertSlug(query.get("slug")) === item.slug.current;
-    }
-
-    return isActive;
+    return (
+      item.slug != null && convertSlug(query.get("slug")) === item.slug.current
+    );
   };
 
   return (

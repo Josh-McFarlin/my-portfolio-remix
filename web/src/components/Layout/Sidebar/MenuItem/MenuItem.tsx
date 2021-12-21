@@ -52,13 +52,10 @@ const MenuItem: React.FC<MenuItemProps> = ({ item, toggle }) => {
   const location = useLocation();
   const [query] = useSearchParams();
 
-  let isActive = false;
-  if ("slug" in item && item.slug != null) {
-    isActive =
-      (location.pathname === urls.pages.sanityPage() &&
-        convertSlug(query.get("slug")) === item.slug.current) ||
-      location.pathname === item.slug.current;
-  }
+  const isActive =
+    item.slug != null &&
+    (convertSlug(query.get("slug")) === item.slug.current ||
+      location.pathname === item.slug.current);
 
   return (
     <motion.div className={styles.root} variants={variants} onClick={toggle}>

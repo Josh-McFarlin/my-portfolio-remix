@@ -1,7 +1,8 @@
+import type React from "react";
 import { createPortal } from "react-dom";
 
-const Portal = ({ children }) => {
-  const portalRoot = document.getElementById("portalRoot");
+const Portal: React.FC = ({ children }) => {
+  const portalRoot = document.getElementById("portalRoot")!;
 
   return createPortal(children, portalRoot);
 };

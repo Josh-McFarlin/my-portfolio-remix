@@ -1,4 +1,5 @@
 import React from "react";
+import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import BlockContent from "../../../BlockContent";
 import Cta from "../../../../Cta";
 import SanityImage from "../../../SanityImage";
@@ -6,9 +7,18 @@ import styles from "./Hero.module.scss.json";
 
 interface HeroProps {
   heading: string;
-  backgroundImage: object;
+  backgroundImage: SanityImageSource;
   tagline: unknown[];
-  ctas: object[];
+  ctas: {
+    _key: string;
+    title: string;
+    route?: {
+      slug?: {
+        current?: string;
+      };
+    };
+    link?: string;
+  }[];
 }
 
 const Hero: React.FC<HeroProps> = ({
@@ -26,7 +36,7 @@ const Hero: React.FC<HeroProps> = ({
       {ctas && (
         <div className={styles.ctas}>
           {ctas.map((cta) => (
-            <Cta {...cta} key={cta._key} />
+            <Cta key={cta._key} {...cta} />
           ))}
         </div>
       )}

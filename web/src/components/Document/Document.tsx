@@ -5,7 +5,6 @@ import Seo from "../Seo";
 interface PropTypes {
   environment?: "development" | "production";
   title: string;
-  preview?: boolean;
   lang?: string;
   favicons?: {
     appleIconUrl: string;

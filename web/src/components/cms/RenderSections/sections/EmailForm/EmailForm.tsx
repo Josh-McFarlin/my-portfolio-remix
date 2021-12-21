@@ -2,7 +2,7 @@ import React from "react";
 
 import styles from "./EmailForm.module.scss.json";
 
-const encode = (data) =>
+const encode = (data: Record<string, string | number>) =>
   Object.keys(data)
     .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
     .join("&");
@@ -122,11 +122,6 @@ const EmailForm: React.FC<EmailFormProps> = ({ heading, subtitle }) => {
       </div>
     </section>
   );
-};
-
-EmailForm.defaultProps = {
-  heading: null,
-  subtitle: null,
 };
 
 export default EmailForm;

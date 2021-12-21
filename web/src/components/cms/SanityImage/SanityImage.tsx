@@ -7,14 +7,13 @@ import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import styles from "./SanityImage.module.scss.json";
 import { client } from "~/utils/sanity/client";
 
-type PropTypes = {
+type PropTypes = Omit<React.HTMLProps<HTMLImageElement>, "src"> & {
   className?: string;
   src: SanityImageSource;
   options?: UseNextSanityImageOptions;
   layout?: "responsive" | "intrinsic" | "fixed" | "fill";
   objectFit?: "fill" | "contain" | "cover";
   sizes?: string;
-  alt?: string;
 };
 
 const SanityImage: React.FC<PropTypes> = ({
@@ -25,6 +24,7 @@ const SanityImage: React.FC<PropTypes> = ({
   objectFit,
   sizes,
   alt,
+  ...rest
 }) => {
   const { ref, inView } = useInView({
     triggerOnce: true,
@@ -63,6 +63,7 @@ const SanityImage: React.FC<PropTypes> = ({
         height={imageProps.height}
         src={imageSrc}
         alt={alt || (src as any)?.alt || ""}
+        {...(rest as any)}
       />
       <noscript>
         <img
@@ -74,6 +75,7 @@ const SanityImage: React.FC<PropTypes> = ({
           ref={ref}
           src={imageProps.src}
           alt={alt || (src as any)?.alt || ""}
+          {...(rest as any)}
         />
       </noscript>
     </div>

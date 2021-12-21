@@ -3,9 +3,22 @@ import SanityImage from "../cms/SanityImage";
 import styles from "./RenderResume.module.scss.json";
 import { getClient } from "~/utils/sanity/client";
 
-const Loader = () => <div className={styles.loading}>Loading Resume...</div>;
+type ResourceType = "link" | "pdf" | "image";
+type PropTypes = {
+  first: ResourceType;
+  second: ResourceType;
+  image: string;
+  link: string;
+  pdf: string;
+};
 
-const RenderResume = ({ first, second, image, link, pdf }) => {
+const RenderResume: React.FC<PropTypes> = ({
+  first,
+  second,
+  image,
+  link,
+  pdf,
+}) => {
   const [pdfLink, setPdfLink] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(true);
   const [showWhich, setShowWhich] = React.useState(first);
@@ -44,7 +57,7 @@ const RenderResume = ({ first, second, image, link, pdf }) => {
       {(link || pdfLink) && (
         <a
           className={styles.link}
-          href={showWhich === "link" ? link : pdfLink}
+          href={showWhich === "link" ? link : pdfLink || link}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -52,7 +65,7 @@ const RenderResume = ({ first, second, image, link, pdf }) => {
         </a>
       )}
       <div className={styles.resumeContainer}>
-        {isLoading && <Loader />}
+        {isLoading && <div className={styles.loading}>Loading Resume...</div>}
         {(showWhich === "link" || showWhich === "pdf") && (
           <iframe
             className={styles.resume}

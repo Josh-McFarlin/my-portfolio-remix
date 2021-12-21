@@ -4,7 +4,14 @@ import styles from "./WorkExperience.module.scss.json";
 
 interface WorkExperienceProps {
   heading: string;
-  jobs: object[];
+  jobs: {
+    company: string;
+    position: string;
+    location: string;
+    startDate: string;
+    endDate: string;
+    description: object[];
+  }[];
 }
 
 const WorkExperience: React.FC<WorkExperienceProps> = ({ heading, jobs }) => (

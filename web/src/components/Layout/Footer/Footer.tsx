@@ -1,8 +1,10 @@
 import React from "react";
 import { Link, useLocation, useSearchParams } from "remix";
+import clsx from "clsx";
 import BlockContent from "../../cms/BlockContent";
 import urls from "../../../utils/urls";
 import styles from "./Footer.module.scss.json";
+import { convertSlug } from "~/utils/sanity/utils";
 
 interface FooterProps {
   navItems?: {
@@ -25,25 +27,41 @@ const Footer: React.FC<FooterProps> = ({ navItems = [], text }) => {
     return null;
   }
 
+  const isRouteActive = (item: string | { slug?: { current: string } }) => {
+    if (typeof item === "string") return item === location.pathname;
+
+    return (
+      item.slug != null && convertSlug(query.get("slug")) === item.slug.current
+    );
+  };
+
   return (
     <div className={styles.root}>
       <nav>
         <ul className={styles.items}>
           {navItems.map((item) => {
-            const isActive =
-              location.pathname === "/LandingPage" &&
-              query.get("slug") === item.slug.current;
+            const { slug, title, link, _id } = item;
 
             return (
-              <li key={item._id} className={styles.item}>
-                <Link
-                  to={urls.pages.sanityPage(item.slug.current)}
-                  prefetch={item.prefetch ? "intent" : "none"}
-                >
-                  <a data-is-active={isActive ? "true" : "false"}>
-                    {item.title}
+              <li
+                key={_id}
+                className={clsx(
+                  styles.navItem,
+                  isRouteActive(item) && styles.active
+                )}
+              >
+                {slug == null ? (
+                  <a href={link} target="_blank" rel="noopener noreferrer">
+                    {title}
                   </a>
-                </Link>
+                ) : (
+                  <Link
+                    to={urls.pages.sanityPage(slug.current)}
+                    prefetch={item.prefetch ? "intent" : "none"}
+                  >
+                    {title}
+                  </Link>
+                )}
               </li>
             );
           })}

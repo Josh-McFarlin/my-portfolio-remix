@@ -4,7 +4,16 @@ import styles from "./ProjectsSection.module.scss.json";
 
 interface ProjectsSectionProps {
   heading?: string;
-  projects: object[];
+  projects: {
+    name: string;
+    tags?: string[];
+    description: unknown[];
+    image: object;
+    links?: {
+      title: string;
+      href: string;
+    }[];
+  }[];
 }
 
 const ProjectsSection: React.FC<ProjectsSectionProps> = ({
@@ -22,9 +31,5 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
     </section>
   </div>
 );
-
-ProjectsSection.defaultProps = {
-  heading: null,
-};
 
 export default ProjectsSection;

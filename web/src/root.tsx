@@ -69,7 +69,6 @@ export default function App() {
     <Document
       environment={environment}
       title={siteConfig?.name || "Portfolio"}
-      preview={preview}
       lang={siteConfig?.lang || "en"}
       favicons={favicons}
       siteConfig={siteConfigData}

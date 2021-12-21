@@ -27,12 +27,11 @@ const Layout: React.FC<PropTypes> = ({
     return <div>Missing config</div>;
   }
 
-  const { name, mainNavigation, footerNavigation, footerText, logo } =
-    siteConfig;
+  const { name, mainNavigation, footerNavigation, footerText } = siteConfig;
 
   return (
     <>
-      <Header name={name} logo={logo} navItems={mainNavigation} />
+      <Header name={name} navItems={mainNavigation} />
       <Sidebar navItems={mainNavigation} />
       <div className={classes.content} {...rest}>
         {children}

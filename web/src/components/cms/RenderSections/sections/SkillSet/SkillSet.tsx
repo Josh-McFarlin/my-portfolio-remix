@@ -4,7 +4,10 @@ import styles from "./SkillSet.module.scss.json";
 
 interface SkillSetProps {
   heading: string;
-  skills: object[];
+  skills: {
+    name?: string;
+    image?: object;
+  }[];
 }
 
 const SkillSet: React.FC<SkillSetProps> = ({ heading, skills }) => (

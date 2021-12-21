@@ -1,10 +1,11 @@
 import React from "react";
+import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import SanityImage from "../../../../SanityImage";
 import styles from "./Skill.module.scss.json";
 
 interface SkillProps {
   name?: string;
-  image?: object;
+  image?: SanityImageSource;
 }
 
 const Skill: React.FC<SkillProps> = ({ name, image }) => (
@@ -24,10 +25,5 @@ const Skill: React.FC<SkillProps> = ({ name, image }) => (
     {name && <p className={styles.skillText}>{name}</p>}
   </div>
 );
-
-Skill.defaultProps = {
-  name: null,
-  image: null,
-};
 
 export default Skill;

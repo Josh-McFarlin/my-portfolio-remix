@@ -8,15 +8,18 @@ interface ProjectProps {
   tags?: string[];
   description: unknown[];
   image: object;
-  links?: object[];
+  links?: {
+    title: string;
+    href: string;
+  }[];
 }
 
 const Project: React.FC<ProjectProps> = ({
   name,
-  tags,
+  tags = [],
   description,
   image,
-  links,
+  links = [],
 }) => (
   <div className={styles.root}>
     <div className={styles.imageContainer}>
@@ -57,10 +60,5 @@ const Project: React.FC<ProjectProps> = ({
     </div>
   </div>
 );
-
-Project.defaultProps = {
-  links: [],
-  tags: [],
-};
 
 export default Project;

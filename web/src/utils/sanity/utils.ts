@@ -31,7 +31,7 @@ export const usePreviewSubscription = <D>(
 
   React.useEffect(() => {
     let sub: Subscription;
-    let store: GroqStore;
+    let store: GroqStore = null;
 
     async function createStore() {
       const { projectId, dataset } = config;

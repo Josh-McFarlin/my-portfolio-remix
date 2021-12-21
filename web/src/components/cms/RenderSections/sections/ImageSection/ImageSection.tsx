@@ -1,4 +1,5 @@
 import React from "react";
+import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import BlockContent from "../../../BlockContent";
 import Cta from "../../../../Cta";
 import SanityImage from "../../../SanityImage";
@@ -8,14 +9,19 @@ interface ImageSectionProps {
   heading: string;
   label: string;
   text: unknown[];
-  image: {
-    asset?: {
-      _ref?: string;
-    };
-  };
+  image: SanityImageSource;
   backgroundImage: string;
   tagline: string;
-  cta: object;
+  cta: {
+    _key: string;
+    title: string;
+    route?: {
+      slug?: {
+        current?: string;
+      };
+    };
+    link?: string;
+  };
 }
 
 const ImageSection = ({

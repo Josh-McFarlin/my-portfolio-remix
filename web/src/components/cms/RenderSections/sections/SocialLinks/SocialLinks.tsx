@@ -77,11 +77,4 @@ const TextSection = ({
   </div>
 );
 
-TextSection.defaultProps = {
-  linkedIn: null,
-  gitHub: null,
-  twitter: null,
-  instagram: null,
-};
-
 export default TextSection;

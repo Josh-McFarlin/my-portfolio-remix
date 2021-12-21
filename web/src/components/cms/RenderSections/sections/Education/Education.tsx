@@ -5,7 +5,15 @@ import styles from "./Education.module.scss.json";
 
 interface EducationProps {
   heading: string;
-  schools: object[];
+  schools: {
+    name: string;
+    location: string;
+    startYear: string;
+    endYear: string;
+    description: object[];
+    completedCourses: string[];
+    currentCourses: string[];
+  }[];
 }
 
 const Education: React.FC<EducationProps> = ({ heading, schools }) => (

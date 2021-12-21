@@ -1,4 +1,5 @@
 import React from "react";
+import dayjs from "dayjs";
 import BlockContent from "../../../../BlockContent";
 import styles from "./Job.module.scss.json";
 
@@ -7,7 +8,7 @@ interface JobProps {
   position: string;
   location: string;
   startDate: string;
-  endDate: string;
+  endDate?: string;
   description: object[];
 }
 
@@ -19,44 +20,20 @@ const Job = ({
   endDate,
   description,
 }: JobProps) => {
-  const startForm = new Date(startDate);
-  const endForm = new Date(endDate);
+  const start = dayjs(startDate);
+  // May 2017 - Present
+  let dateString: string = `${start.format("MMM YYYY")} - Present`;
 
-  const onlyMonth = {
-    month: "long",
-    timeZone: "UTC",
-  };
+  if (endDate != null) {
+    const end = dayjs(endDate);
 
-  const monYear = {
-    month: "long",
-    year: "numeric",
-    timeZone: "UTC",
-  };
-
-  let startMonth;
-  let startMonYear;
-  try {
-    startMonth = new Intl.DateTimeFormat("en-US", onlyMonth).format(startForm);
-    startMonYear = new Intl.DateTimeFormat("en-US", monYear).format(startForm);
-  } catch (e) {
-    console.log("DT Error", e);
-  }
-
-  let dateString;
-  let endMonYear;
-  if (endDate == null) {
-    dateString = `${startMonYear} - Present`;
-  } else {
-    try {
-      endMonYear = new Intl.DateTimeFormat("en-US", monYear).format(endForm);
-    } catch (e) {
-      console.log("DT Error", e);
+    if (start.year() === end.year()) {
+      // May - Oct 2017
+      dateString = `${start.format("MMM")} - ${end.format("MMM YYYY")}`;
+    } else {
+      // May 2017 - Dec 2019
+      dateString = `${start.format("MMM YYYY")} - ${end.format("MMM YYYY")}`;
     }
-
-    dateString =
-      startForm.getUTCFullYear() === endForm.getUTCFullYear()
-        ? `${startMonth} - ${endMonYear}`
-        : `${startMonYear} - ${endMonYear}`;
   }
 
   return (
