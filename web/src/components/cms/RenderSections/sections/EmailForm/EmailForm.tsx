@@ -1,11 +1,6 @@
 import React from "react";
-
+import { Form, useTransition, useActionData } from "remix";
 import styles from "./EmailForm.module.scss.json";
-
-const encode = (data: Record<string, string | number>) =>
-  Object.keys(data)
-    .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
-    .join("&");
 
 interface EmailFormProps {
   heading?: string;
@@ -13,112 +8,75 @@ interface EmailFormProps {
 }
 
 const EmailForm: React.FC<EmailFormProps> = ({ heading, subtitle }) => {
-  const [botField, setBotField] = React.useState("");
-  const [name, setName] = React.useState("");
-  const [replyTo, setReplyTo] = React.useState("");
-  const [message, setMessage] = React.useState("");
+  const transition = useTransition();
+  const actionData = useActionData();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    const optionals = {};
-    if (botField.length > 0) {
-      optionals["bot-field"] = botField;
+  React.useEffect(() => {
+    console.log("actionData", actionData);
+    if (actionData) {
+      if (actionData.success) {
+        // eslint-disable-next-line no-alert
+        alert("Successfully submitted contact form!");
+      } else {
+        // eslint-disable-next-line no-alert
+        alert(
+          "An error occurred while submitting the contact form, please try again later!"
+        );
+      }
     }
-
-    if (name.length > 0 && replyTo.length > 0 && message.length > 0) {
-      await fetch("/", {
-        method: "post",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: encode({
-          "form-name": "contact",
-          name,
-          replyTo,
-          message,
-          ...optionals,
-        }),
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw Error(response.statusText);
-          }
-
-          // eslint-disable-next-line no-alert
-          alert("Successfully submitted contact form!");
-        })
-        .catch(() => {
-          // eslint-disable-next-line no-alert
-          alert(
-            "An error occurred while submitting the contact form, please try again later!"
-          );
-        });
-    }
-  };
+  }, [actionData?.success]);
 
   return (
     <section className={styles.root}>
       <div className={styles.container}>
         {heading && <h2 className={styles.heading}>{heading}</h2>}
         {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
-        <form
-          className={styles.form}
-          name="contact"
-          method="POST"
-          data-netlify="true"
-          data-netlify-honeypot="bot-field"
-          action="/contact/"
-          onSubmit={handleSubmit}
-        >
-          <input type="hidden" name="form-name" value="contact" />
-          <p hidden>
-            <label>
-              {"Don’t fill this out if you're human:"}
-              <input
-                value={botField}
-                onChange={(event) => setBotField(event.target.value)}
-              />
-            </label>
-          </p>
+        <Form className={styles.form} name="contact" method="post">
+          <fieldset disabled={transition.state === "submitting"}>
+            <p hidden>
+              <label>
+                {"Don’t fill this out if you're human:"}
+                <input name="bf" type="text" />
+              </label>
+            </p>
 
-          <label htmlFor="fname">Name</label>
-          <input
-            className={styles.formInput}
-            id="fname"
-            type="text"
-            name="name"
-            placeholder="Your Name"
-            required
-            value={name}
-            onChange={(event) => setName(event.target.value)}
-          />
+            <label htmlFor="fname">Name</label>
+            <input
+              className={styles.formInput}
+              id="fname"
+              name="name"
+              type="text"
+              placeholder="Your Name"
+              required
+              defaultValue={actionData ? actionData.values.name : undefined}
+            />
 
-          <label htmlFor="femail">ReplyTo</label>
-          <input
-            className={styles.formInput}
-            id="femail"
-            type="email"
-            name="replyTo"
-            placeholder="Your Email"
-            required
-            value={replyTo}
-            onChange={(event) => setReplyTo(event.target.value)}
-          />
+            <label htmlFor="femail">ReplyTo</label>
+            <input
+              className={styles.formInput}
+              id="femail"
+              name="replyTo"
+              type="email"
+              placeholder="Your Email"
+              required
+              defaultValue={actionData ? actionData.values.replyTo : undefined}
+            />
 
-          <label htmlFor="fmessage">Message</label>
-          <textarea
-            className={styles.formInput}
-            id="fmessage"
-            name="message"
-            placeholder="Message"
-            required
-            value={message}
-            onChange={(event) => setMessage(event.target.value)}
-          />
+            <label htmlFor="fmessage">Message</label>
+            <textarea
+              className={styles.formInput}
+              id="fmessage"
+              name="message"
+              placeholder="Message"
+              required
+              defaultValue={actionData ? actionData.values.message : undefined}
+            />
 
-          <input className={styles.formButton} type="submit" value="Send" />
-        </form>
+            <button className={styles.formButton} type="submit">
+              {transition.state === "submitting" ? "Sending..." : "Send"}
+            </button>
+          </fieldset>
+        </Form>
       </div>
     </section>
   );
