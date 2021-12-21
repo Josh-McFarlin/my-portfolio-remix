@@ -1,5 +1,6 @@
 const path = require("path");
 const fs = require("fs-extra");
+const bundleCSS = require("./bundle-css");
 
 const scssModuleRegex = /.module.[s]?css$/;
 
@@ -22,6 +23,8 @@ module.exports = {
             : `${outputFilename}.json`;
 
           await fs.writeFile(jsonPath, JSON.stringify(json || {}));
+
+          await bundleCSS();
         }
       },
     }),

@@ -1,7 +1,8 @@
 const path = require("path");
 const fs = require("fs-extra");
+const postcss = require("postcss");
 
-async function run() {
+async function bundleCSS() {
   const stylePath = path.resolve(__dirname, "src", "styles");
   const genPath = path.join(stylePath, "generated");
   const bundlePath = path.join(stylePath, "modules.css");
@@ -15,29 +16,25 @@ async function run() {
         .map((file) => fs.readFile(path.join(genPath, file), "utf8"))
     );
 
-    await fs.writeFile(bundlePath, contents.join("\n"));
+    const { css } = await postcss([
+      require("cssnano")({
+        preset: "default",
+      }),
+    ]).process(contents.join("\n"), {
+      from: undefined,
+    });
 
-    await Promise.all(
-      files
-        .filter((i) => i.endsWith(".json"))
-        .map((i) =>
-          fs.move(path.join(genPath, i), path.join(stylePath, i), {
-            overwrite: true,
-          })
-        )
-    );
-
-    await fs.remove(genPath);
+    await fs.writeFile(bundlePath, css);
 
     console.log("CSS bundled!");
   }
 }
 
-try {
-  run();
-} catch (error) {
-  console.error("Failed to bundle CSS!");
-  console.error(error.message || error);
-}
+// try {
+//   bundleCSS();
+// } catch (error) {
+//   console.error("Failed to bundle CSS!");
+//   console.error(error.message || error);
+// }
 
-module.exports = {};
+module.exports = bundleCSS;
