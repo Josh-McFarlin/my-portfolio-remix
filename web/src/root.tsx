@@ -72,6 +72,8 @@ export default function App() {
       preview={preview}
       lang={siteConfig?.lang || "en"}
       favicons={favicons}
+      siteConfig={siteConfigData}
+      page={pageData}
     >
       <Layout preview={preview} siteConfig={siteConfigData}>
         <Outlet context={[pageData, siteConfigData]} />
