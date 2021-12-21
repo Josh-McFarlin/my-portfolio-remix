@@ -17,6 +17,7 @@ import {
   getSiteFavicons,
 } from "~/utils/sanity/actions/siteConfig";
 import { usePreviewSubscription } from "~/utils/sanity/utils";
+import { getPage } from "~/utils/sanity/actions/page";
 
 export function links() {
   return [
@@ -33,34 +34,35 @@ export function links() {
   ];
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({ request, params }) => {
   const requestUrl = new URL(request?.url);
   const preview =
     requestUrl?.searchParams?.get("preview") === SANITY_PREVIEW_SECRET;
 
-  const { data: favicons } = await getSiteFavicons(preview, SANITY_API_TOKEN);
-  const { data, query, queryParams } = await getSiteConfig(
-    preview,
-    SANITY_API_TOKEN
-  );
+  const favicons = await getSiteFavicons(preview, SANITY_API_TOKEN);
+  const siteConfig = await getSiteConfig(preview, SANITY_API_TOKEN);
+  const page = await getPage(params?.slug, preview, SANITY_API_TOKEN);
 
   return {
     environment: NODE_ENV,
     preview,
     favicons,
-    data,
-    query: preview ? query : null,
-    queryParams: preview ? queryParams : null,
+    siteConfig,
+    page,
   };
 };
 
 export default function App() {
-  const { environment, preview, favicons, data, query, queryParams } =
-    useLoaderData();
-  const { data: siteConfig } = usePreviewSubscription(query, {
+  const { environment, preview, favicons, siteConfig, page } = useLoaderData();
+  const { data: siteConfigData } = usePreviewSubscription(siteConfig.query, {
     preview,
-    params: queryParams,
-    initialData: data,
+    params: siteConfig.queryParams,
+    initialData: siteConfig.data,
+  });
+  const { data: pageData } = usePreviewSubscription(page.query, {
+    preview,
+    params: page.queryParams,
+    initialData: page.data,
   });
 
   return (
@@ -71,8 +73,8 @@ export default function App() {
       lang={siteConfig?.lang || "en"}
       favicons={favicons}
     >
-      <Layout preview={preview} siteConfig={siteConfig}>
-        <Outlet />
+      <Layout preview={preview} siteConfig={siteConfigData}>
+        <Outlet context={[pageData, siteConfigData]} />
       </Layout>
     </Document>
   );
