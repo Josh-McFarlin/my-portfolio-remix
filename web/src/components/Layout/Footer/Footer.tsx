@@ -46,7 +46,7 @@ const Footer: React.FC<FooterProps> = ({ navItems = [], text }) => {
               <li
                 key={_id}
                 className={clsx(
-                  styles.navItem,
+                  styles.item,
                   isRouteActive(item) && styles.active
                 )}
               >

@@ -19,9 +19,9 @@ const RenderResume: React.FC<PropTypes> = ({
   link,
   pdf,
 }) => {
-  const [pdfLink, setPdfLink] = React.useState(null);
-  const [isLoading, setIsLoading] = React.useState(true);
-  const [showWhich, setShowWhich] = React.useState(first);
+  const [pdfLink, setPdfLink] = React.useState<string | null>(null);
+  const [isLoading, setIsLoading] = React.useState<boolean>(true);
+  const [showWhich, setShowWhich] = React.useState<ResourceType | null>(first);
 
   const onLoaded = () => setIsLoading(false);
 
