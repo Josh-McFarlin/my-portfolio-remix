@@ -1,0 +1,78 @@
+@import "../../../../../styles/Properties";
+@import "../../../../../styles/Colors";
+
+.root {
+  width: 100%;
+  height: 100%;
+  background: #747fe0;
+  clip-path: circle(25px at right 35px top 35px);
+  transition: clip-path 1s;
+  transition-delay: 0.75s;
+
+  summary {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #747fe0;
+    cursor: pointer;
+    border-radius: 25px;
+
+    .barContainer {
+      width: 28px;
+      height: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .bar {
+        width: 28px;
+        height: 4px;
+        border-radius: 4px;
+        background: white;
+        opacity: 1;
+        transition: transform 0.5s, opacity 0.25s;
+
+        &:nth-child(1) {
+          transform: rotate(0deg);
+          transform-origin: left center;
+        }
+        &:nth-child(2) {
+          opacity: 1;
+        }
+        &:nth-child(3) {
+          transform: rotate(0deg);
+          transform-origin: left center;
+        }
+      }
+    }
+  }
+}
+
+.root[open] {
+  clip-path: circle(110vh at right 35px top 35px);
+  transition-delay: 0s;
+
+  summary {
+    .barContainer {
+      .bar {
+        width: 34px;
+
+        &:nth-child(1) {
+          transform: rotate(45deg) !important;
+        }
+        &:nth-child(2) {
+          width: 28px;
+          opacity: 0 !important;
+        }
+        &:nth-child(3) {
+          transform: rotate(-45deg) !important;
+        }
+      }
+    }
+  }
+}

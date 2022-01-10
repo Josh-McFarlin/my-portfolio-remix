@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import Sidebar from "./Sidebar";
+import CSSSidebar from "./CSSSidebar";
 import classes from "./Layout.module.scss.json";
 
 interface PropTypes {
@@ -32,7 +32,7 @@ const Layout: React.FC<PropTypes> = ({
   return (
     <>
       <Header name={name} navItems={mainNavigation} />
-      <Sidebar navItems={mainNavigation} />
+      <CSSSidebar navItems={mainNavigation} />
       <div className={classes.content} {...rest}>
         {children}
       </div>

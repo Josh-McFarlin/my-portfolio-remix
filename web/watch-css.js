@@ -1,6 +1,7 @@
 const path = require("path");
 const fs = require("fs-extra");
 const postcss = require("postcss");
+const chokidar = require("chokidar");
 
 const stylePath = path.resolve(__dirname, "src", "styles");
 const genPath = path.join(stylePath, "generated");
@@ -30,7 +31,14 @@ async function bundleCSS() {
   }
 }
 
-bundleCSS().catch((error) => {
-  console.error("Failed to bundle CSS!");
-  console.error(error.message || error);
-});
+bundleCSS();
+chokidar
+  .watch(genPath, {
+    ignoreInitial: true,
+  })
+  .on("all", () => {
+    bundleCSS().catch((error) => {
+      console.error("Failed to bundle CSS!");
+      console.error(error.message || error);
+    });
+  });

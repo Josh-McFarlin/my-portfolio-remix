@@ -4,6 +4,17 @@ const bundleCSS = require("./bundle-css");
 
 const scssModuleRegex = /.module.[s]?css$/;
 
+const bundleCSSPlugin = () => {
+  return {
+    postcssPlugin: "bundleCSS",
+    async OnceExit() {
+      await bundleCSS();
+      console.log("plugin done");
+    },
+  };
+};
+bundleCSSPlugin.postcss = true;
+
 module.exports = {
   plugins: [
     require("postcss-calc"),
@@ -23,13 +34,12 @@ module.exports = {
             : `${outputFilename}.json`;
 
           await fs.writeFile(jsonPath, JSON.stringify(json || {}));
-
-          await bundleCSS();
         }
       },
     }),
     require("cssnano")({
       preset: "default",
     }),
+    // bundleCSSPlugin,
   ],
 };

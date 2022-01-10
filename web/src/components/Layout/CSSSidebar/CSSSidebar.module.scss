@@ -1,0 +1,27 @@
+@import "../../../../styles/Properties";
+@import "../../../../styles/Colors";
+
+.root {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 5;
+
+  @include breakpoint-above-medium {
+    display: none;
+  }
+
+  .background {
+    background: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 300px;
+    max-width: 70%;
+    height: 100%;
+  }
+}
