@@ -12,7 +12,6 @@ interface PropTypes {
     sixIconUrl: string;
   };
   siteConfig?: any;
-  pageData?: any;
 }
 
 const Document: React.FC<PropTypes> = ({
@@ -23,9 +22,6 @@ const Document: React.FC<PropTypes> = ({
   favicons = {},
   siteConfig = {
     name: "Portfolio",
-  },
-  pageData = {
-    disallowRobots: false,
   },
 }) => (
   <html lang={lang ?? "en"}>
@@ -62,7 +58,7 @@ const Document: React.FC<PropTypes> = ({
       <title>{title}</title>
       <Meta />
       <Links />
-      <Seo siteConfig={siteConfig} page={pageData} />
+      <Seo siteConfig={siteConfig} />
     </head>
     <body>
       {children}

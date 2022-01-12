@@ -60,7 +60,7 @@ const Header: React.FC<HeaderProps> = ({
                 ) : (
                   <Link
                     to={urls.pages.sanityPage(slug.current)}
-                    prefetch={item.prefetch ? "intent" : "none"}
+                    prefetch={item.prefetch ? "render" : "intent"}
                   >
                     {title}
                   </Link>

@@ -21,7 +21,6 @@ import {
   getSiteFavicons,
 } from "~/utils/sanity/actions/siteConfig";
 import { usePreviewSubscription } from "~/utils/sanity/utils";
-import { getPage } from "~/utils/sanity/actions/page";
 
 export const links: LinksFunction = () => {
   return [
@@ -38,55 +37,19 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export const loader: LoaderFunction = async ({ request, params }) => {
-  const requestUrl = new URL(request?.url);
-  const preview =
-    requestUrl?.searchParams?.get("preview") === SANITY_PREVIEW_SECRET;
-  const slug = params?.slug || "/";
-
-  const favicons = await getSiteFavicons(preview, SANITY_API_TOKEN);
-  const siteConfig = await getSiteConfig(preview, SANITY_API_TOKEN);
-  const page = await getPage(slug, preview, SANITY_API_TOKEN);
-
-  return {
-    environment: NODE_ENV,
-    preview,
-    favicons,
-    siteConfig,
-    page,
-  };
-};
-
-export default function App() {
-  const { environment, preview, favicons, siteConfig, page } = useLoaderData();
-  const { data: siteConfigData } = usePreviewSubscription(siteConfig.query, {
-    preview,
-    params: siteConfig.queryParams,
-    initialData: siteConfig.data,
-  });
-  const { data: pageData } = usePreviewSubscription(page.query, {
-    preview,
-    params: page.queryParams,
-    initialData: page.data,
-  });
+export const ErrorBoundary: ErrorBoundaryComponent = ({ error }) => {
+  console.error(error);
 
   return (
-    <Document
-      environment={environment}
-      title={siteConfig?.name || "Portfolio"}
-      lang={siteConfig?.lang || "en"}
-      favicons={favicons}
-      siteConfig={siteConfigData}
-      pageData={pageData}
-    >
-      <Layout preview={preview} siteConfig={siteConfigData}>
-        <Outlet context={[pageData, siteConfigData]} />
-      </Layout>
+    <Document title="Uh-oh!">
+      <h1>App Error</h1>
+      <pre>{error.message}</pre>
+      <p>An error has occurred, please try again later!</p>
     </Document>
   );
-}
+};
 
-export function CatchBoundary() {
+export const CatchBoundary: React.FC = () => {
   const caught = useCatch();
 
   switch (caught.status) {
@@ -106,16 +69,45 @@ export function CatchBoundary() {
       );
     }
   }
-}
+};
 
-export const ErrorBoundary: ErrorBoundaryComponent = ({ error }) => {
-  console.error(error);
+export const loader: LoaderFunction = async ({ request }) => {
+  const requestUrl = new URL(request?.url);
+  const preview =
+    requestUrl?.searchParams?.get("preview") === SANITY_PREVIEW_SECRET;
+
+  const favicons = await getSiteFavicons(preview, SANITY_API_TOKEN);
+  const siteConfig = await getSiteConfig(preview, SANITY_API_TOKEN);
+
+  return {
+    environment: NODE_ENV,
+    preview,
+    favicons,
+    siteConfig,
+  };
+};
+
+const App: React.FC = () => {
+  const { environment, preview, favicons, siteConfig } = useLoaderData();
+  const { data: siteConfigData } = usePreviewSubscription(siteConfig.query, {
+    preview,
+    params: siteConfig.queryParams,
+    initialData: siteConfig.data,
+  });
 
   return (
-    <Document title="Uh-oh!">
-      <h1>App Error</h1>
-      <pre>{error.message}</pre>
-      <p>An error has occurred, please try again later!</p>
+    <Document
+      environment={environment}
+      title={siteConfig?.name || "Portfolio"}
+      lang={siteConfig?.lang || "en"}
+      favicons={favicons}
+      siteConfig={siteConfigData}
+    >
+      <Layout preview={preview} siteConfig={siteConfigData}>
+        <Outlet />
+      </Layout>
     </Document>
   );
 };
+
+export default App;

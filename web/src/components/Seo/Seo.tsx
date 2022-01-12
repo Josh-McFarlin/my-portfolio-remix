@@ -1,4 +1,5 @@
 import React from "react";
+import { usePageData } from "~/utils/remix";
 
 interface PropTypes {
   siteConfig: {
@@ -8,25 +9,15 @@ interface PropTypes {
     footerText: any;
     logo: any;
   };
-  page: {
-    title: string;
-    description: string;
-    disallowRobots: boolean;
-    content: any[];
-    resume: any;
-    config: any;
-    socialLinks: any[];
-    slug: string;
-    openGraphImages: {
-      url: string;
-      alt: string;
-      width: number;
-      height: number;
-    }[];
-  };
 }
 
-const Seo: React.FC<PropTypes> = ({ siteConfig, page }) => {
+const Seo: React.FC<PropTypes> = ({ siteConfig }) => {
+  const page = usePageData();
+
+  if (!page) {
+    return null;
+  }
+
   const title = page?.title
     ? `${siteConfig.name} | ${page.title}`
     : siteConfig.name;

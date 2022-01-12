@@ -38,7 +38,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ item, className }) => {
       ) : (
         <Link
           to={urls.pages.sanityPage(slug.current)}
-          prefetch={item.prefetch ? "intent" : "none"}
+          prefetch={item.prefetch ? "render" : "intent"}
         >
           <div className={styles.container}>
             {icon != null && <Icon type={icon} className={styles.icon} />}

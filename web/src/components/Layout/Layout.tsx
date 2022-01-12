@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "remix";
 import Header from "./Header";
 import Footer from "./Footer";
 import CSSSidebar from "./CSSSidebar";
@@ -38,9 +39,9 @@ const Layout: React.FC<PropTypes> = ({
       </div>
       <Footer navItems={footerNavigation} text={footerText} />
       {preview && (
-        <a className={classes.exitPreviewButton} href="/api/exit-preview">
+        <Link className={classes.exitPreviewButton} to="/" reloadDocument>
           Exit Preview
-        </a>
+        </Link>
       )}
     </>
   );
