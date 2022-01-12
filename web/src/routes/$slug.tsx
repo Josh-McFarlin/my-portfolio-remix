@@ -72,4 +72,6 @@ const SlugPage = () => {
   return null;
 };
 
+export const handle = { hydrate: true };
+
 export default SlugPage;

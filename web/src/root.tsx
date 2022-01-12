@@ -31,6 +31,15 @@ export const links: LinksFunction = () => {
     { rel: "stylesheet", href: ComponentCSS },
     { rel: "stylesheet", href: ModulesCSS },
     {
+      rel: "preconnect",
+      href: "https://fonts.googleapis.com",
+    },
+    {
+      rel: "preconnect",
+      crossOrigin: "anonymous",
+      href: "https://fonts.gstatic.com",
+    },
+    {
       rel: "stylesheet",
       href: "https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap",
     },

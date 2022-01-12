@@ -6,6 +6,7 @@ import { useNextSanityImage } from "next-sanity-image";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import styles from "./SanityImage.module.scss.json";
 import { client } from "~/utils/sanity/client";
+import { useShouldHydrate } from "~/utils/remix";
 
 type PropTypes = Omit<React.HTMLProps<HTMLImageElement>, "src"> & {
   className?: string;
@@ -26,6 +27,7 @@ const SanityImage: React.FC<PropTypes> = ({
   alt,
   ...rest
 }) => {
+  const hydrate = useShouldHydrate();
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0,
@@ -49,6 +51,23 @@ const SanityImage: React.FC<PropTypes> = ({
     }
   }, [imageProps, inView]);
 
+  const noScriptImg = (
+    <img
+      loading="lazy"
+      data-objectfit={objectFit}
+      className={clsx(styles.image, className)}
+      width={imageProps.width}
+      height={imageProps.height}
+      src={imageProps.src}
+      alt={alt || (src as any)?.alt || ""}
+      {...(rest as any)}
+    />
+  );
+
+  if (!hydrate) {
+    return noScriptImg;
+  }
+
   return (
     <div ref={ref} className={styles.root}>
       <img
@@ -65,19 +84,7 @@ const SanityImage: React.FC<PropTypes> = ({
         alt={alt || (src as any)?.alt || ""}
         {...(rest as any)}
       />
-      <noscript>
-        <img
-          loading="lazy"
-          data-objectfit={objectFit}
-          className={clsx(styles.image, className)}
-          width={imageProps.width}
-          height={imageProps.height}
-          ref={ref}
-          src={imageProps.src}
-          alt={alt || (src as any)?.alt || ""}
-          {...(rest as any)}
-        />
-      </noscript>
+      <noscript>{noScriptImg}</noscript>
     </div>
   );
 };

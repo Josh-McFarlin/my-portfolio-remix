@@ -7,3 +7,5 @@ web/dist/
 
 studio/node_modules
 studio/dist/
+
+web/src/styles/modules.css

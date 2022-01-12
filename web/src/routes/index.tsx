@@ -42,4 +42,6 @@ const IndexPage = () => {
   return null;
 };
 
+export const handle = { hydrate: true };
+
 export default IndexPage;

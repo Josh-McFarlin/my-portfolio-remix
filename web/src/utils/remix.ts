@@ -1,4 +1,3 @@
-import React from "react";
 import { useMatches } from "remix";
 
 type PageType = {
@@ -19,14 +18,13 @@ type PageType = {
 };
 
 export const usePageData = (): PageType | null => {
-  const [page, setPage] = React.useState<PageType | null>(null);
-  const m = useMatches();
+  const matches = useMatches();
 
-  React.useEffect(() => {
-    if (m?.length > 1) {
-      setPage(m[m.length - 1]?.data?.page?.data || null);
-    }
-  }, [m]);
+  return matches[matches.length - 1]?.data?.page?.data || null;
+};
 
-  return page;
+export const useShouldHydrate = (): boolean => {
+  const matches = useMatches();
+
+  return matches.some((match) => match.handle?.hydrate);
 };
