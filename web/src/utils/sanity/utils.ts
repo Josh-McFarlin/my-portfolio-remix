@@ -11,11 +11,8 @@ export const convertSlug = (
   return typeof slug === "string" ? slug : slug.join("/");
 };
 
-/**
- * @link https://github.com/SimeonGriggs/sanity-remix-preview/blob/main/web/app/lib/sanity/usePreviewSubscription.js
- * @param query
- * @param subscriptionOptions
- */
+const { projectId, dataset } = config;
+
 export const usePreviewSubscription = <D>(
   query: string,
   subscriptionOptions: {
@@ -28,48 +25,49 @@ export const usePreviewSubscription = <D>(
 } => {
   const { preview, params, initialData } = subscriptionOptions;
   const [data, setData] = React.useState<D>(initialData);
+  const store = React.useMemo<GroqStore | null>(
+    () =>
+      preview
+        ? groqStore({
+            projectId,
+            dataset,
+            listen: true,
+            overlayDrafts: true,
+            documentLimit: 1000,
+          })
+        : null,
+    [preview]
+  );
+
+  React.useEffect(() => {
+    return () => {
+      if (store) {
+        store.close();
+      }
+    };
+  }, []);
 
   React.useEffect(() => {
     let sub: Subscription;
-    let store: GroqStore = null;
 
-    async function createStore() {
-      const { projectId, dataset } = config;
-
-      store = groqStore({
-        projectId,
-        dataset,
-        listen: true,
-        overlayDrafts: true,
-        documentLimit: 1000,
-      });
-
-      sub = store.subscribe(
-        query,
-        params ?? {}, // Params
-        (err, result) => {
-          if (err) {
-            console.error("Oh no, an error:", err);
-            console.log(query);
-            return;
-          }
-
-          setData(result);
-          console.log("Res", result);
+    if (preview && store) {
+      sub = store.subscribe(query, params ?? {}, (error, result) => {
+        if (error) {
+          console.error("Error subscribing to Sanity:", error.message || error);
+          console.log("Query of error:", query);
+          return;
         }
-      );
-    }
 
-    if (preview && !store) {
-      createStore();
+        setData(result);
+      });
+    } else {
+      setData(initialData);
     }
 
     return () => {
       if (sub) sub.unsubscribe();
-      if (store) store.close();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [preview, params]);
+  }, [query, preview, params, initialData]);
 
   return {
     data,

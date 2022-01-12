@@ -27,7 +27,9 @@ interface PropTypes {
 }
 
 const Seo: React.FC<PropTypes> = ({ siteConfig, page }) => {
-  const title = `${siteConfig.name} | ${page.title}`;
+  const title = page?.title
+    ? `${siteConfig.name} | ${page.title}`
+    : siteConfig.name;
   const robots = page.disallowRobots ? "noindex,nofollow" : "index,follow";
 
   return (
@@ -35,10 +37,16 @@ const Seo: React.FC<PropTypes> = ({ siteConfig, page }) => {
       <title>{title}</title>
       <meta name="robots" content={robots} />
       <meta name="googlebot" content={robots} />
+      {page?.description && (
+        <meta name="description" content={page.description} />
+      )}
       <meta name="description" content={page.description} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={page.description} />
-      {page.openGraphImages.map((image) => (
+      {page?.description && (
+        <meta property="og:description" content={page.description} />
+      )}
+      {page?.openGraphImages?.map((image) => (
         <React.Fragment key={image.url}>
           <meta property="og:image" content={image.url} />
           <meta property="og:image:alt" content={image.alt} />

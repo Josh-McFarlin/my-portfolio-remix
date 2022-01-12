@@ -2,7 +2,6 @@ import React from "react";
 import type {
   ErrorBoundaryComponent,
   LoaderFunction,
-  MetaFunction,
   LinksFunction,
 } from "remix";
 import { useCatch, useLoaderData } from "remix";
@@ -43,10 +42,11 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   const requestUrl = new URL(request?.url);
   const preview =
     requestUrl?.searchParams?.get("preview") === SANITY_PREVIEW_SECRET;
+  const slug = params?.slug || "/";
 
   const favicons = await getSiteFavicons(preview, SANITY_API_TOKEN);
   const siteConfig = await getSiteConfig(preview, SANITY_API_TOKEN);
-  const page = await getPage(params?.slug, preview, SANITY_API_TOKEN);
+  const page = await getPage(slug, preview, SANITY_API_TOKEN);
 
   return {
     environment: NODE_ENV,
@@ -54,32 +54,6 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     favicons,
     siteConfig,
     page,
-  };
-};
-
-export const meta: MetaFunction = ({ data }: { data: any | undefined }) => {
-  if (!data) {
-    return {
-      title: "Portfolio",
-    } as any;
-  }
-
-  const { siteConfig, page } = data;
-
-  const title = `${siteConfig.data.name} | ${page.data.title}`;
-  const robots = page.data.disallowRobots ? "noindex,nofollow" : "index,follow";
-
-  return {
-    title,
-    robots,
-    googlebot: robots,
-    description: page.data.description,
-    "og:title": title,
-    "og:description": page.description,
-    "og:image": page.data.openGraphImages.map((i) => i.url),
-    "og:image:alt": page.data.openGraphImages.map((i) => i.alt || ""),
-    "og:image:width": page.data.openGraphImages.map((i) => i.width),
-    "og:image:height": page.data.openGraphImages.map((i) => i.height),
   };
 };
 
@@ -102,6 +76,8 @@ export default function App() {
       title={siteConfig?.name || "Portfolio"}
       lang={siteConfig?.lang || "en"}
       favicons={favicons}
+      siteConfig={siteConfigData}
+      pageData={pageData}
     >
       <Layout preview={preview} siteConfig={siteConfigData}>
         <Outlet context={[pageData, siteConfigData]} />

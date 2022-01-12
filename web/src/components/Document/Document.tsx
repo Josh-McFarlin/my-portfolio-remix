@@ -1,5 +1,6 @@
 import React from "react";
 import { Links, LiveReload, Meta, Scripts } from "remix";
+import Seo from "../Seo";
 
 interface PropTypes {
   environment?: "development" | "production";
@@ -10,6 +11,8 @@ interface PropTypes {
     thirtyIconUrl: string;
     sixIconUrl: string;
   };
+  siteConfig?: any;
+  pageData?: any;
 }
 
 const Document: React.FC<PropTypes> = ({
@@ -18,6 +21,12 @@ const Document: React.FC<PropTypes> = ({
   title,
   lang = "en",
   favicons = {},
+  siteConfig = {
+    name: "Portfolio",
+  },
+  pageData = {
+    disallowRobots: false,
+  },
 }) => (
   <html lang={lang ?? "en"}>
     <head>
@@ -53,6 +62,7 @@ const Document: React.FC<PropTypes> = ({
       <title>{title}</title>
       <Meta />
       <Links />
+      <Seo siteConfig={siteConfig} page={pageData} />
     </head>
     <body>
       {children}
